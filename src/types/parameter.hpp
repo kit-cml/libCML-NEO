@@ -34,7 +34,7 @@ struct Parameter
   char hill_file[100];
   char herg_file[100];
   char drug_name[100];
-  char concs[20];
+  char concs[50];
   char user_name[20];
   void init();
   void show_val();
