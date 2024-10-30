@@ -171,9 +171,6 @@ int assign_params(int *argc, char *argv[], Parameter *p_param)
     else if (strcasecmp(key, "Number_of_Pacing") == 0) {
       p_param->pace_max = strtol( value, NULL, 10 );
     }
-    else if (strcasecmp(key, "Last_Drug_Check_Pace") == 0) {
-      p_param->last_drug_check_pace = strtol( value, NULL, 10 );
-    }
     else if (strcasecmp(key, "Time_Step") == 0) {
       p_param->dt = strtod( value, NULL );
     }
@@ -194,9 +191,6 @@ int assign_params(int *argc, char *argv[], Parameter *p_param)
     }
     else if (strcasecmp(key, "Drug_Name") == 0) {
       strncpy( p_param->drug_name, value, sizeof(p_param->concs) );
-    }
-    else if (strcasecmp(key, "Inet_Vm_Threshold") == 0) {
-      p_param->inet_vm_threshold = strtod( value, NULL );
     }
     else if (strcasecmp(key, "Concentrations") == 0) {
       strncpy( p_param->concs, value, sizeof(p_param->concs) );

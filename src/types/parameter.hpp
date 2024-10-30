@@ -6,7 +6,6 @@ struct Parameter
   bool is_print_graph; // TRUE if we want to print graph
   double bcl; // basic cycle length
   short pace_max; // maximum pace
-  short last_drug_check_pace;
   short solver_type; // 0: Euler, 1: CVode, 2: Analytical, 3: BDF
   short celltype;  // 0: endo, 1: epi, 2: M
   short prior_risk; // 0: low, 1: intermediate, 2: high
@@ -16,7 +15,7 @@ struct Parameter
   double dVm_min;    // minimum dVm/dt
   double dVm_max;    // maximum dVm/dt
   double dtw;       // writing step
-  double inet_vm_threshold; // Vm threshold for calculating inet
+  bool is_using_steady_states_init_vals;
   // begin conductance scaling vars
   double gks_scale;
   double gkr_scale;
@@ -36,6 +35,7 @@ struct Parameter
   char drug_name[100];
   char concs[50];
   char user_name[20];
+  char steady_states_init_vals_file[100];
   void init();
   void show_val();
 };
