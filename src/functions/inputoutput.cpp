@@ -231,16 +231,26 @@ int assign_params(int *argc, char *argv[], Parameter *p_param)
     else if (strcasecmp(key, "Tau_h_Scale") == 0) {
       p_param->tau_h_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "Hill_file") == 0){
+    else if (strcasecmp(key, "Hill_File") == 0){
       strncpy( p_param->hill_file, value, sizeof(p_param->hill_file));
     }
-    else if (strcasecmp(key, "Herg_file") == 0){
+    else if (strcasecmp(key, "Herg_File") == 0){
       strncpy( p_param->herg_file, value, sizeof(p_param->herg_file));
     }
     else if (strcasecmp(key, "Mutation_Type") == 0){
       strncpy( p_param->mutation_type, value, sizeof(p_param->mutation_type));
     }
-    
+    else if (strcasecmp(key, "Is_Using_Steady_State_Init_Vals") == 0){
+      p_param->is_using_steady_states_init_vals = strtol( value, NULL, 10 );
+    }
+    else if (strcasecmp(key, "Steady_States_Init_Vals_File") == 0){
+      strncpy( p_param->steady_states_init_vals_file, value, sizeof(p_param->steady_states_init_vals_file));
+    }
+    else if (strcasecmp(key, "Is_Postprocessing") == 0){
+      p_param->is_postprocessing = strtol( value, NULL, 10 );
+    }
+
+  
   }
 
   if( is_default == false ) fclose( fp_inputdeck );

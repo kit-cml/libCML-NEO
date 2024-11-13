@@ -16,6 +16,7 @@ struct Parameter
   double dVm_max;    // maximum dVm/dt
   double dtw;       // writing step
   bool is_using_steady_states_init_vals;
+  bool is_postprocessing;
   // begin conductance scaling vars
   double gks_scale;
   double gkr_scale;

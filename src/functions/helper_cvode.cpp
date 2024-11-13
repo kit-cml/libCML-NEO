@@ -57,6 +57,8 @@ double dt_min, double dt_max, double *dt )
   }
   else{
     CVodeSetMaxStep(p_cvode->cvode_mem, dt_max);
+    // Enabling this one makes the output become messed up.
+    // Need to find the solution before uncommenting the line below.
     //*dt = dt_max;
   }
 }
