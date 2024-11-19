@@ -8,6 +8,7 @@ protected:
   // since this is an abstract class.
   Cellmodel(){}
 public:
+  bool is_s1; // used for multicell simulation (1D/2D/3D simulations)
   short algebraic_size;
   short constants_size;
   short states_size;

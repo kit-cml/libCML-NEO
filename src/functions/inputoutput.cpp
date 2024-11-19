@@ -153,100 +153,94 @@ int assign_params(int *argc, char *argv[], Parameter *p_param)
   // and store each line to the buffer
   while ( is_default == false && fgets( buffer, 100, fp_inputdeck ) != NULL ) {
     sscanf( buffer, "%s %*s %s", key, value );
-    if (strcasecmp(key, "Celltype") == 0) {
+    if (strcasecmp(key, "celltype") == 0) {
       p_param->celltype = strtol( value, NULL, 10 );
     }
-    else if (strcasecmp(key, "Solver_Type") == 0) {
+    else if (strcasecmp(key, "solver_type") == 0) {
       p_param->solver_type = strtol( value, NULL, 10 );
     }
-    else if (strcasecmp(key, "User_Name") == 0) {
+    else if (strcasecmp(key, "user_name") == 0) {
       strncpy( p_param->user_name, value, sizeof(p_param->user_name));
     }
-    else if (strcasecmp(key, "Is_Print_Graph") == 0) {
-      p_param->is_print_graph = strtol( value, NULL, 10 );
-    }
-    else if (strcasecmp(key, "Basic_Cycle_Length") == 0) {
+    else if (strcasecmp(key, "basic_cycle_length") == 0) {
       p_param->bcl = strtod( value, NULL );
     }
-    else if (strcasecmp(key, "Number_of_Pacing") == 0) {
+    else if (strcasecmp(key, "number_of_pacing") == 0) {
       p_param->pace_max = strtol( value, NULL, 10 );
     }
-    else if (strcasecmp(key, "Time_Step") == 0) {
+    else if (strcasecmp(key, "time_step") == 0) {
       p_param->dt = strtod( value, NULL );
     }
-    else if (strcasecmp(key, "Time_Step_Min") == 0) {
+    else if (strcasecmp(key, "time_step_min") == 0) {
       p_param->dt_min = strtod( value, NULL );
     }
-    else if (strcasecmp(key, "Time_Step_Max") == 0) {
+    else if (strcasecmp(key, "time_step_max") == 0) {
       p_param->dt_max = strtod( value, NULL );
     }
-    else if (strcasecmp(key, "dVm/dt_Min") == 0) {
-      p_param->dVm_min = strtod( value, NULL );
+    else if (strcasecmp(key, "dvm/dt_min") == 0) {
+      p_param->dvm_min = strtod( value, NULL );
     }
-    else if (strcasecmp(key, "dVm/dt_Max") == 0) {
-      p_param->dVm_max = strtod( value, NULL );
+    else if (strcasecmp(key, "dvm/dt_max") == 0) {
+      p_param->dvm_max = strtod( value, NULL );
     }
-    else if (strcasecmp(key, "Writing_Step") == 0) {
+    else if (strcasecmp(key, "writing_step") == 0) {
       p_param->dtw = strtod( value, NULL );
     }
-    else if (strcasecmp(key, "Drug_Name") == 0) {
+    else if (strcasecmp(key, "drug_name") == 0) {
       strncpy( p_param->drug_name, value, sizeof(p_param->concs) );
     }
-    else if (strcasecmp(key, "Concentrations") == 0) {
+    else if (strcasecmp(key, "concentrations") == 0) {
       strncpy( p_param->concs, value, sizeof(p_param->concs) );
     }
-    else if (strcasecmp(key, "Prior_Risk") == 0) {
+    else if (strcasecmp(key, "prior_risk") == 0) {
       p_param->prior_risk = strtol( value, NULL, 10 );;
     }
-    else if (strcasecmp(key, "GKs_Scale") == 0) {
+    else if (strcasecmp(key, "gks_scale") == 0) {
       p_param->gks_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "GKr_Scale") == 0) {
+    else if (strcasecmp(key, "gkr_scale") == 0) {
       p_param->gkr_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "GK1_Scale") == 0) {
+    else if (strcasecmp(key, "gk1_scale") == 0) {
       p_param->gk1_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "Gto_Scale") == 0) {
+    else if (strcasecmp(key, "gto_scale") == 0) {
       p_param->gto_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "PCa_Scale") == 0) {
+    else if (strcasecmp(key, "pca_scale") == 0) {
       p_param->pca_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "GNa_Scale") == 0) {
+    else if (strcasecmp(key, "gna_scale") == 0) {
       p_param->gna_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "GNaL_Scale") == 0) {
+    else if (strcasecmp(key, "gnal_scale") == 0) {
       p_param->gnal_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "GNab_Scale") == 0) {
+    else if (strcasecmp(key, "gnab_scale") == 0) {
       p_param->gnab_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "GCab_Scale") == 0) {
+    else if (strcasecmp(key, "gcab_scale") == 0) {
       p_param->gcab_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "Gncx_Scale") == 0) {
+    else if (strcasecmp(key, "gncx_scale") == 0) {
       p_param->gncx_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "Tau_h_Scale") == 0) {
+    else if (strcasecmp(key, "tau_h_scale") == 0) {
       p_param->tau_h_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "Hill_File") == 0){
+    else if (strcasecmp(key, "hill_hile") == 0){
       strncpy( p_param->hill_file, value, sizeof(p_param->hill_file));
     }
-    else if (strcasecmp(key, "Herg_File") == 0){
+    else if (strcasecmp(key, "herg_file") == 0){
       strncpy( p_param->herg_file, value, sizeof(p_param->herg_file));
     }
-    else if (strcasecmp(key, "Mutation_Type") == 0){
+    else if (strcasecmp(key, "mutation_type") == 0){
       strncpy( p_param->mutation_type, value, sizeof(p_param->mutation_type));
     }
-    else if (strcasecmp(key, "Is_Using_Steady_State_Init_Vals") == 0){
-      p_param->is_using_steady_states_init_vals = strtol( value, NULL, 10 );
-    }
-    else if (strcasecmp(key, "Steady_States_Init_Vals_File") == 0){
+    else if (strcasecmp(key, "steady_states_init_vals_file") == 0 && strlen(value) > 0){
       strncpy( p_param->steady_states_init_vals_file, value, sizeof(p_param->steady_states_init_vals_file));
     }
-    else if (strcasecmp(key, "Is_Postprocessing") == 0){
+    else if (strcasecmp(key, "is_postprocessing") == 0){
       p_param->is_postprocessing = strtol( value, NULL, 10 );
     }
 

@@ -3,7 +3,6 @@
 
 struct Parameter
 {
-  bool is_print_graph; // TRUE if we want to print graph
   double bcl; // basic cycle length
   short pace_max; // maximum pace
   short solver_type; // 0: Euler, 1: CVode, 2: Analytical, 3: BDF
@@ -12,10 +11,11 @@ struct Parameter
   double dt;        // time step
   double dt_min;    // minimum time step (for adaptive dt)
   double dt_max;    // maximum time step (for adaptive dt)
-  double dVm_min;    // minimum dVm/dt
-  double dVm_max;    // maximum dVm/dt
+  double dvm_min;    // minimum dVm/dt
+  double dvm_max;    // maximum dVm/dt
   double dtw;       // writing step
-  bool is_using_steady_states_init_vals;
+  double stim_dur;
+  double stim_amp_scale;
   bool is_postprocessing;
   // begin conductance scaling vars
   double gks_scale;
@@ -37,6 +37,14 @@ struct Parameter
   char concs[50];
   char user_name[20];
   char steady_states_init_vals_file[100];
+
+  // from this point on,
+  // these parameters are belonging to
+  // the 2D/3D simulations.
+  bool is_ecg;
+  bool is_bspm;
+  
+
   void init();
   void show_val();
 };
