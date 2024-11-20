@@ -228,7 +228,7 @@ int assign_params(int *argc, char *argv[], Parameter *p_param)
     else if (strcasecmp(key, "tau_h_scale") == 0) {
       p_param->tau_h_scale = strtod( value, NULL);
     }
-    else if (strcasecmp(key, "hill_hile") == 0){
+    else if (strcasecmp(key, "hill_file") == 0){
       strncpy( p_param->hill_file, value, sizeof(p_param->hill_file));
     }
     else if (strcasecmp(key, "herg_file") == 0){
