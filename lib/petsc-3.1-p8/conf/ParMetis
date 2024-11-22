@@ -1,0 +1,14 @@
+SHELL          = /usr/bin/sh
+CP             = /usr/bin/cp
+RM             = /usr/bin/rm -f
+MKDIR          = /usr/bin/mkdir -p
+AR             = /usr/bin/ar
+ARFLAGS        = cr
+AR_LIB_SUFFIX  = a
+RANLIB         = /usr/bin/ranlib
+PARMETIS_ROOT  = /home/cml/Downloads/petsc-3.1-p8/externalpackages/ParMetis-dev-p3
+PREFIX         = /home/cml/Downloads/petsc-3.1-p8/linux-gnu-cxx-debug
+METISLIB       = $(PARMETIS_ROOT)/libmetis.$(AR_LIB_SUFFIX)
+PARMETISLIB    = $(PARMETIS_ROOT)/libparmetis.$(AR_LIB_SUFFIX)
+CC             = mpicc
+CFLAGS         =  -fPIC  -Wwrite-strings -Wno-strict-aliasing -g3  -I/opt/intel/oneapi/mpi/2021.5.1/include/gfortran/4.8.0 -I/opt/intel/oneapi/mpi/2021.5.1/include -I.

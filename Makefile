@@ -37,7 +37,7 @@ CXXFLAGS := -fPIC -fpermissive -std=c++11 -I/opt/prog/sundials/sundials-5.7.0/in
 CFLAGS := -fPIC
 
 # Flags for binary
-LDFLAGS := -L/usr/local/lib ./libs/libsundials_cvode.a ./libs/libsundials_nvecserial.a
+LDFLAGS := -L/usr/local/lib ./lib/libsundials_cvode.a ./lib/libsundials_nvecserial.a
 
 # Static libs build
 LIB_BUILD_STATIC := gcc-ar -rcs

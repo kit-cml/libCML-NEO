@@ -1,0 +1,881 @@
+==========================================
+ 
+See documentation/faq.html and documentation/bugreporting.html
+for help with installation problems. Please send EVERYTHING
+printed out below when reporting problems
+ 
+To subscribe to the PETSc announcement list, send mail to 
+majordomo@mcs.anl.gov with the message: 
+subscribe petsc-announce
+ 
+To subscribe to the PETSc users mailing list, send mail to 
+majordomo@mcs.anl.gov with the message: 
+subscribe petsc-users
+ 
+==========================================
+On Tue Jul 23 15:46:09 KST 2024 on master
+Machine characteristics: Linux master 3.10.0-1160.66.1.el7.x86_64 #1 SMP Wed May 18 16:02:34 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+-----------------------------------------
+Using PETSc directory: /home/cml/Downloads/petsc-3.1-p8
+Using PETSc arch: linux-gnu-cxx-debug
+-----------------------------------------
+PETSC_VERSION_RELEASE    1
+PETSC_VERSION_MAJOR      3
+PETSC_VERSION_MINOR      1
+PETSC_VERSION_SUBMINOR   0
+PETSC_VERSION_PATCH      8
+PETSC_VERSION_DATE       "Mar, 25, 2010"
+PETSC_VERSION_PATCH_DATE "Thu Mar 17 13:37:48 CDT 2011"
+PETSC_VERSION_HG         "1409dfc44c26997c47851592fa5dce2a0c80bb8d"
+PETSC_VERSION_DATE_HG         "Thu Mar 17 12:43:03 2011 -0500"
+PETSC_VERSION_(MAJOR,MINOR,SUBMINOR) \
+-----------------------------------------
+Using configure Options: --prefix=/opt/prog/petsc/petsc-3.1-p8 --download-f-blas-lapack=1 --download-sundials=1 --download-superlu_dist=1 --download-parmetis=1 --with-clanguage=C++ --with-shared=1
+Using configuration flags:
+#define INCLUDED_PETSCCONF_H
+#define IS_COLORING_MAX 65535
+#define STDC_HEADERS 1
+#define MPIU_COLORING_VALUE MPI_UNSIGNED_SHORT
+#define PETSC_HAVE_BUILTIN_EXPECT 1
+#define PETSC_UINTPTR_T uintptr_t
+#define PETSC_PATH_SEPARATOR ':'
+#define PETSC_SLSUFFIX "so"
+#define PETSC_HAVE_PARMETIS 1
+#define PETSC_DIR_SEPARATOR '/'
+#define PETSC_LIB_DIR "/opt/prog/petsc/petsc-3.1-p8/lib"
+#define PETSC_STATIC_INLINE static inline
+#define PETSC_REPLACE_DIR_SEPARATOR '\\'
+#define PETSC_HAVE_SUPERLU_DIST 1
+#define PETSC_HAVE_DOUBLE_ALIGN_MALLOC 1
+#define PETSC_RESTRICT  __restrict__
+#define PETSC_HAVE_X11 1
+#define PETSC_HAVE_XMMINTRIN_H 1
+#define PETSC_HAVE_MPI 1
+#define PETSC_USE_SOCKET_VIEWER 1
+#define PETSC_Prefetch(a,b,c) _mm_prefetch((const void*)(a),(int)(c))
+#define PETSC_HAVE_BLASLAPACK 1
+#define PETSC_HAVE_SUNDIALS 1
+#define PETSC_HAVE_FORTRAN 1
+#define PETSC_USE_SINGLE_LIBRARY 1
+#define PETSC_HAVE_STRING_H 1
+#define PETSC_HAVE_SYS_TYPES_H 1
+#define PETSC_HAVE_ENDIAN_H 1
+#define PETSC_HAVE_SYS_PROCFS_H 1
+#define PETSC_HAVE_DLFCN_H 1
+#define PETSC_HAVE_STDINT_H 1
+#define PETSC_HAVE_LINUX_KERNEL_H 1
+#define PETSC_HAVE_TIME_H 1
+#define PETSC_HAVE_MATH_H 1
+#define PETSC_HAVE_STDLIB_H 1
+#define PETSC_HAVE_SYS_PARAM_H 1
+#define PETSC_HAVE_SYS_SOCKET_H 1
+#define PETSC_HAVE_UNISTD_H 1
+#define PETSC_HAVE_SYS_WAIT_H 1
+#define PETSC_HAVE_LIMITS_H 1
+#define PETSC_HAVE_SYS_UTSNAME_H 1
+#define PETSC_HAVE_NETINET_IN_H 1
+#define PETSC_HAVE_FLOAT_H 1
+#define PETSC_HAVE_SEARCH_H 1
+#define PETSC_HAVE_SYS_SYSINFO_H 1
+#define PETSC_HAVE_SYS_RESOURCE_H 1
+#define PETSC_HAVE_SYS_TIMES_H 1
+#define PETSC_HAVE_NETDB_H 1
+#define PETSC_HAVE_MALLOC_H 1
+#define PETSC_HAVE_PWD_H 1
+#define PETSC_HAVE_FCNTL_H 1
+#define PETSC_HAVE_STRINGS_H 1
+#define PETSC_HAVE_MEMORY_H 1
+#define PETSC_TIME_WITH_SYS_TIME 1
+#define PETSC_HAVE_SYS_TIME_H 1
+#define PETSC_USING_F90 1
+#define PETSC_PRINTF_FORMAT_CHECK(A,B) __attribute__((format (printf, A, B)))
+#define PETSC_HAVE_RTLD_NOW 1
+#define PETSC_HAVE_RTLD_LOCAL 1
+#define PETSC_HAVE_RTLD_LAZY 1
+#define PETSC_C_STATIC_INLINE static inline
+#define PETSC_HAVE_FORTRAN_UNDERSCORE 1
+#define PETSC_HAVE_CXX_NAMESPACE 1
+#define PETSC_HAVE_RTLD_GLOBAL 1
+#define PETSC_C_RESTRICT  __restrict__
+#define PETSC_CXX_RESTRICT  __restrict__
+#define PETSC_CXX_STATIC_INLINE static inline
+#define PETSC_HAVE_LIBPTHREAD 1
+#define PETSC_HAVE_LIBMPIFORT 1
+#define PETSC_HAVE_LIBDL 1
+#define PETSC_HAVE_LIBSUNDIALS_CVODE 1
+#define PETSC_HAVE_LIBMETIS 1
+#define PETSC_HAVE_LIBM 1
+#define PETSC_HAVE_LIBSUNDIALS_NVECSERIAL 1
+#define PETSC_HAVE_LIBGFORTRAN 1
+#define PETSC_HAVE_LIBGCC_S 1
+#define PETSC_HAVE_LIBSUPERLU_DIST_2 1
+#define PETSC_HAVE_LIBPARMETIS 1
+#define PETSC_HAVE_LIBFLAPACK 1
+#define PETSC_HAVE_ERF 1
+#define PETSC_HAVE_LIBFBLAS 1
+#define PETSC_HAVE_LIBSUNDIALS_NVECPARALLEL 1
+#define PETSC_HAVE_LIBQUADMATH 1
+#define PETSC_HAVE_LIBRT 1
+#define PETSC_HAVE_LIBMPI 1
+#define PETSC_ARCH "linux-gnu-cxx-debug"
+#define PETSC_DIR "/home/cml/Downloads/petsc-3.1-p8"
+#define HAVE_GZIP 1
+#define PETSC_CLANGUAGE_CXX 1
+#define PETSC_USE_ERRORCHECKING 1
+#define PETSC_MISSING_DREAL 1
+#define PETSC_SIZEOF_MPI_COMM 4
+#define PETSC_BITS_PER_BYTE 8
+#define PETSC_SIZEOF_MPI_FINT 4
+#define PETSC_SIZEOF_VOID_P 8
+#define PETSC_RETSIGTYPE void
+#define PETSC_HAVE_CXX_COMPLEX 1
+#define PETSC_SIZEOF_LONG 8
+#define PETSC_USE_FORTRANKIND 1
+#define PETSC_SIZEOF_SIZE_T 8
+#define PETSC_SIZEOF_CHAR 1
+#define PETSC_SIZEOF_DOUBLE 8
+#define PETSC_SIZEOF_FLOAT 4
+#define PETSC_HAVE_C99_COMPLEX 1
+#define PETSC_SIZEOF_INT 4
+#define PETSC_SIZEOF_LONG_LONG 8
+#define PETSC_SIZEOF_SHORT 2
+#define PETSC_HAVE_STRCASECMP 1
+#define PETSC_HAVE_POPEN 1
+#define PETSC_HAVE_SIGSET 1
+#define PETSC_HAVE_GETWD 1
+#define PETSC_HAVE_VSNPRINTF 1
+#define PETSC_HAVE_TIMES 1
+#define PETSC_HAVE_DLSYM 1
+#define PETSC_HAVE_SNPRINTF 1
+#define PETSC_HAVE_GETPWUID 1
+#define PETSC_HAVE_GETHOSTBYNAME 1
+#define PETSC_HAVE_SLEEP 1
+#define PETSC_HAVE_DLERROR 1
+#define PETSC_HAVE_FORK 1
+#define PETSC_HAVE_RAND 1
+#define PETSC_HAVE_GETTIMEOFDAY 1
+#define PETSC_HAVE_DLCLOSE 1
+#define PETSC_HAVE_UNAME 1
+#define PETSC_HAVE_GETHOSTNAME 1
+#define PETSC_HAVE_MKSTEMP 1
+#define PETSC_HAVE_SIGACTION 1
+#define PETSC_HAVE_DRAND48 1
+#define PETSC_HAVE_NANOSLEEP 1
+#define PETSC_HAVE_VA_COPY 1
+#define PETSC_HAVE_CLOCK 1
+#define PETSC_HAVE_ACCESS 1
+#define PETSC_HAVE_SIGNAL 1
+#define PETSC_HAVE_USLEEP 1
+#define PETSC_HAVE_GETRUSAGE 1
+#define PETSC_HAVE_VFPRINTF 1
+#define PETSC_HAVE_MEMALIGN 1
+#define PETSC_HAVE_GETDOMAINNAME 1
+#define PETSC_HAVE_TIME 1
+#define PETSC_HAVE_LSEEK 1
+#define PETSC_HAVE_SOCKET 1
+#define PETSC_HAVE_SYSINFO 1
+#define PETSC_HAVE_READLINK 1
+#define PETSC_HAVE_REALPATH 1
+#define PETSC_HAVE_DLOPEN 1
+#define PETSC_HAVE_MEMMOVE 1
+#define PETSC_HAVE__GFORTRAN_IARGC 1
+#define PETSC_SIGNAL_CAST  
+#define PETSC_HAVE_GETCWD 1
+#define PETSC_HAVE_VPRINTF 1
+#define PETSC_HAVE_BZERO 1
+#define PETSC_HAVE_GETPAGESIZE 1
+#define PETSC_HAVE_FORTRAN_GET_COMMAND_ARGUMENT 1
+#define PETSC_HAVE_GFORTRAN_IARGC 1
+#define PETSC_MEMALIGN 16
+#define PETSC_LEVEL1_DCACHE_LINESIZE 64
+#define PETSC_LEVEL1_DCACHE_SIZE 32768
+#define PETSC_LEVEL1_DCACHE_ASSOC 8
+#define PETSC_HAVE_ISINF 1
+#define PETSC_HAVE_ISNAN 1
+#define PETSC_HAVE_MPI_COMM_C2F 1
+#define PETSC_HAVE_MPI_LONG_DOUBLE 1
+#define PETSC_HAVE_MPI_COMM_F2C 1
+#define PETSC_HAVE_MPI_FINT 1
+#define PETSC_HAVE_MPI_F90MODULE 1
+#define PETSC_HAVE_MPI_FINALIZED 1
+#define PETSC_HAVE_MPI_COMM_SPAWN 1
+#define PETSC_HAVE_MPI_WIN_CREATE 1
+#define PETSC_HAVE_MPIIO 1
+#define PETSC_HAVE_MPI_C_DOUBLE_COMPLEX 1
+#define PETSC_HAVE_MPI_ALLTOALLW 1
+#define PETSC_HAVE_MPI_IN_PLACE 1
+#define PETSC_USE_INFO 1
+#define PETSC_PETSC_USE_BACKWARD_LOOP 1
+#define PETSC_Alignx(a,b)   
+#define PETSC_USE_DEBUG 1
+#define PETSC_USE_LOG 1
+#define PETSC_IS_COLOR_VALUE_TYPE short
+#define PETSC_USE_CTABLE 1
+#define PETSC_USE_PROC_FOR_SIZE 1
+#define PETSC_HAVE_DYNAMIC_LIBRARIES 1
+#define PETSC_HAVE_SHARED_LIBRARIES 1
+#define PETSC_USE_SHARED_LIBRARIES 1
+#define PETSC_USE_GDB_DEBUGGER 1
+#define PETSC_BLASLAPACK_UNDERSCORE 1
+-----------------------------------------
+Using include paths: -I/home/cml/Downloads/petsc-3.1-p8/linux-gnu-cxx-debug/include -I/home/cml/Downloads/petsc-3.1-p8/include -I/home/cml/Downloads/petsc-3.1-p8/linux-gnu-cxx-debug/include -I/opt/intel/oneapi/mpi/2021.5.1/include/gfortran/4.8.0 -I/opt/intel/oneapi/mpi/2021.5.1/include  
+------------------------------------------
+Using C/C++ compiler: mpicxx -Wall -Wwrite-strings -Wno-strict-aliasing -g   -fPIC   
+C/C++ Compiler version: 
+Using Fortran compiler: mpif90 -fPIC -Wall -Wno-unused-variable -g    
+Fortran Compiler version: 
+-----------------------------------------
+Using C/C++ linker: mpicxx
+Using C/C++ flags: -Wall -Wwrite-strings -Wno-strict-aliasing -g 
+Using Fortran linker: mpif90
+Using Fortran flags: -fPIC -Wall -Wno-unused-variable -g  
+-----------------------------------------
+Using libraries: -Wl,-rpath,/home/cml/Downloads/petsc-3.1-p8/linux-gnu-cxx-debug/lib -L/home/cml/Downloads/petsc-3.1-p8/linux-gnu-cxx-debug/lib -lpetsc       -lX11 -Wl,-rpath,/home/cml/Downloads/petsc-3.1-p8/linux-gnu-cxx-debug/lib -L/home/cml/Downloads/petsc-3.1-p8/linux-gnu-cxx-debug/lib -lsuperlu_dist_2.4 -lparmetis -lmetis -lsundials_cvode -lsundials_nvecserial -lsundials_nvecparallel -lflapack -lfblas -lm -Wl,-rpath,/opt/intel/oneapi/mpi/2021.5.1/lib/release -L/opt/intel/oneapi/mpi/2021.5.1/lib/release -Wl,-rpath,/opt/intel/oneapi/mpi/2021.5.1/lib -L/opt/intel/oneapi/mpi/2021.5.1/lib -Wl,-rpath,/usr/lib/gcc/x86_64-redhat-linux/4.8.5 -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5 -Wl,-rpath,/opt/intel/oneapi/mpi/2021.5.1/libfabric/lib -L/opt/intel/oneapi/mpi/2021.5.1/libfabric/lib -Wl,-rpath,/opt/intel/oneapi/mkl/2022.0.2/lib/intel64 -L/opt/intel/oneapi/mkl/2022.0.2/lib/intel64 -Wl,-rpath,/opt/intel/oneapi/tbb/2021.5.1/lib/intel64/gcc4.8 -L/opt/intel/oneapi/tbb/2021.5.1/lib/intel64/gcc4.8 -Wl,-rpath,/opt/intel/oneapi/compiler/2022.0.2/linux/lib -L/opt/intel/oneapi/compiler/2022.0.2/linux/lib -ldl -lmpifort -lmpi -lrt -lpthread -lgcc_s -Wl,-rpath,/home/cml/Downloads/petsc-3.1-p8/-Xlinker -lgfortran -lm -lgfortran -lm -lquadmath -lm -lmpicxx -lstdc++ -ldl -lmpifort -lmpi -lrt -lpthread -lgcc_s -ldl 
+------------------------------------------
+Using mpiexec: /opt/intel/oneapi/mpi/2021.5.1/bin/mpiexec
+==========================================
+/usr/bin/rm -f -rf /home/cml/Downloads/petsc-3.1-p8/linux-gnu-cxx-debug/lib/libpetsc*.*
+/usr/bin/rm -f -f /home/cml/Downloads/petsc-3.1-p8/linux-gnu-cxx-debug/include/petsc*.mod
+BEGINNING TO COMPILE LIBRARIES IN ALL DIRECTORIES
+=========================================
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/inline
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/socket
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/socket/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/ascii
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/ascii/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/ascii/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/binary
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/binary/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/binary/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/binary/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/string
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/string/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/draw
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/draw/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/draw/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/impls/vu
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/viewer/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/impls/x
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/impls/x/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/utils
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/utils/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/draw/utils/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/error
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/error/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/error/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/dll
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/dll/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/fileio
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/fileio/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/fileio/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/memory
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/memory/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/memory/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/objects
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/objects/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/objects/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/time
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/time/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/utils
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/utils/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/utils/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/plog
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/plog/utils
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/plog/utils/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/plog/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/plog/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/random
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/random/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/random/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/random/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/random/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/random/impls/rand
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/random/impls/rand48
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/bag
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/bag/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/bag/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/verbose
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/verbose/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/verbose/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/fsrc
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/f90-src
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/f90-src/fsrc
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/f90-mod
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/python
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/sys/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/utils
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/utils/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/utils/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/interface/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/impls/seq
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/impls/seq/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/impls/seq/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/impls/mpi
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/impls/mpi/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/impls/mpi/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/impls/shared
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/impls/shared/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/vec/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/interface/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/impls/general
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/impls/general/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/impls/stride
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/impls/stride/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/impls/block
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/impls/block/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/impls/block/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/impls/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/utils
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/utils/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/utils/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/is/utils/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/pf
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/pf/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/pf/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/pf/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/pf/impls/constant
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/pf/impls/string
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/pf/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/pf/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/f90-mod
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/vec/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/interface/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/dense
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/dense/seq
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/dense/seq/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/dense/mpi
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/dense/mpi/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/dense/mpi/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/seq
+aijfact.c: In function ‘PetscErrorCode MatCholeskyFactorNumeric_SeqAIJ_inplace(Mat, Mat, const MatFactorInfo*)’:
+aijfact.c:2254:18: warning: variable ‘zeropivot’ set but not used [-Wunused-but-set-variable]
+   PetscReal      zeropivot,rs;
+                  ^
+aijfact.c: In function ‘PetscErrorCode MatILUDTFactor_SeqAIJ(Mat, IS, IS, const MatFactorInfo*, _p_Mat**)’:
+aijfact.c:3236:49: warning: variable ‘both_identity’ set but not used [-Wunused-but-set-variable]
+   PetscTruth         row_identity,icol_identity,both_identity;
+                                                 ^
+matmatmult.c: In function ‘PetscErrorCode MatMatMultSymbolic_SeqAIJ_SeqDense(Mat, Mat, PetscReal, _p_Mat**)’:
+matmatmult.c:273:18: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+   PetscErrorCode ierr;
+                  ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/seq/csrperm
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/seq/crl
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/seq/bas
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/seq/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/seq/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/mpi
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/mpi/superlu_dist
+superlu_dist.c: In function ‘PetscErrorCode MatLUFactorNumeric_SuperLU_DIST(Mat, Mat, const MatFactorInfo*)’:
+superlu_dist.c:263:34: warning: variable ‘irow’ set but not used [-Wunused-but-set-variable]
+                    m=A->rmap->n, irow,colA_start,j,jcol,jB,countA,countB,*bjj,*ajj;
+                                  ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/mpi/csrperm
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/mpi/crl
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/mpi/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/mpi/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/aij/aij
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/shell
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/shell/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/shell/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/baij
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/baij/seq
+baij.c: In function ‘PetscErrorCode MatGetRowIJ_SeqBAIJ(Mat, PetscInt, PetscTruth, PetscTruth, PetscInt*, PetscInt**, PetscInt**, PetscTruth*)’:
+baij.c:1169:63: warning: variable ‘nbs’ set but not used [-Wunused-but-set-variable]
+   PetscInt       i,j,n = a->mbs,nz = a->i[n],bs = A->rmap->bs,nbs = 1,k,l,cnt;
+                                                               ^
+baij2.c: In function ‘PetscErrorCode MatMult_SeqBAIJ_15_ver1(Mat, Vec, Vec)’:
+baij2.c:608:22: warning: variable ‘x1’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                      ^
+baij2.c:608:25: warning: variable ‘x2’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                         ^
+baij2.c:608:28: warning: variable ‘x3’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                            ^
+baij2.c:608:31: warning: variable ‘x4’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                               ^
+baij2.c:608:34: warning: variable ‘x5’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                  ^
+baij2.c:608:37: warning: variable ‘x6’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                     ^
+baij2.c:608:40: warning: variable ‘x7’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                        ^
+baij2.c:608:43: warning: variable ‘x8’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                           ^
+baij2.c:608:46: warning: variable ‘x9’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                              ^
+baij2.c:608:49: warning: variable ‘x10’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                                 ^
+baij2.c:608:53: warning: variable ‘x11’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                                     ^
+baij2.c:608:57: warning: variable ‘x12’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                                         ^
+baij2.c:608:61: warning: variable ‘x13’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                                             ^
+baij2.c:608:65: warning: variable ‘x14’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                                                 ^
+baij2.c:608:69: warning: variable ‘x15’ set but not used [-Wunused-but-set-variable]
+   PetscScalar        x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,*zarray;
+                                                                     ^
+baijfact.c: In function ‘PetscErrorCode MatLUFactorNumeric_SeqBAIJ_2(Mat, Mat, const MatFactorInfo*)’:
+baijfact.c:17:27: warning: variable ‘ics’ set but not used [-Wunused-but-set-variable]
+   const PetscInt  *r,*ic,*ics;
+                           ^
+baijfact.c: In function ‘PetscErrorCode MatCholeskyFactorNumeric_SeqBAIJ_N(Mat, Mat, const MatFactorInfo*)’:
+baijfact.c:563:18: warning: variable ‘zeropivot’ set but not used [-Wunused-but-set-variable]
+   PetscReal      zeropivot,rs;
+                  ^
+baijfact.c: In function ‘PetscErrorCode MatCholeskyFactorNumeric_SeqBAIJ_N_NaturalOrdering(Mat, Mat, const MatFactorInfo*)’:
+baijfact.c:689:18: warning: variable ‘zeropivot’ set but not used [-Wunused-but-set-variable]
+   PetscReal      zeropivot,rs;
+                  ^
+baijfact.c: In function ‘PetscErrorCode MatILUDTFactor_SeqBAIJ(Mat, IS, IS, const MatFactorInfo*, _p_Mat**)’:
+baijfact.c:1335:49: warning: variable ‘both_identity’ set but not used [-Wunused-but-set-variable]
+   PetscTruth         row_identity,icol_identity,both_identity;
+                                                 ^
+baijfact.c:1337:23: warning: variable ‘ics’ set but not used [-Wunused-but-set-variable]
+   const PetscInt     *ics;
+                       ^
+baijfact2.c: In function ‘PetscErrorCode MatLUFactorNumeric_SeqBAIJ_N(Mat, Mat, const MatFactorInfo*)’:
+baijfact2.c:5476:26: warning: variable ‘ics’ set but not used [-Wunused-but-set-variable]
+   const PetscInt *r,*ic,*ics;
+                          ^
+baijfact5.c: In function ‘PetscErrorCode MatLUFactorNumeric_SeqBAIJ_7(Mat, Mat, const MatFactorInfo*)’:
+baijfact5.c:297:26: warning: variable ‘ics’ set but not used [-Wunused-but-set-variable]
+   const PetscInt *r,*ic,*ics;
+                          ^
+baijfact7.c: In function ‘PetscErrorCode MatLUFactorNumeric_SeqBAIJ_6(Mat, Mat, const MatFactorInfo*)’:
+baijfact7.c:243:26: warning: variable ‘ics’ set but not used [-Wunused-but-set-variable]
+   const PetscInt *r,*ic,*ics;
+                          ^
+baijfact9.c: In function ‘PetscErrorCode MatLUFactorNumeric_SeqBAIJ_5(Mat, Mat, const MatFactorInfo*)’:
+baijfact9.c:220:26: warning: variable ‘ics’ set but not used [-Wunused-but-set-variable]
+   const PetscInt *r,*ic,*ics;
+                          ^
+baijfact11.c: In function ‘PetscErrorCode MatLUFactorNumeric_SeqBAIJ_4(Mat, Mat, const MatFactorInfo*)’:
+baijfact11.c:176:26: warning: variable ‘ics’ set but not used [-Wunused-but-set-variable]
+   const PetscInt *r,*ic,*ics;
+                          ^
+baijfact13.c: In function ‘PetscErrorCode MatLUFactorNumeric_SeqBAIJ_3(Mat, Mat, const MatFactorInfo*)’:
+baijfact13.c:136:26: warning: variable ‘ics’ set but not used [-Wunused-but-set-variable]
+   const PetscInt *r,*ic,*ics;
+                          ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/baij/seq/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/baij/seq/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/baij/mpi
+baijov.c: In function ‘PetscErrorCode MatIncreaseOverlap_MPIBAIJ_Receive(Mat, PetscInt, PetscInt**, PetscInt**, PetscInt*)’:
+baijov.c:445:18: warning: variable ‘rank’ set but not used [-Wunused-but-set-variable]
+   PetscMPIInt    rank;
+                  ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/baij/mpi/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/baij/mpi/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/adj
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/adj/mpi
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/adj/mpi/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/maij
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/is
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/is/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/sbaij
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/sbaij/seq
+sbaijfact.c: In function ‘PetscErrorCode MatCholeskyFactorNumeric_SeqSBAIJ_1_inplace(Mat, Mat, const MatFactorInfo*)’:
+sbaijfact.c:1173:21: warning: variable ‘shift’ set but not used [-Wunused-but-set-variable]
+   PetscReal      rs,shift;
+                     ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/sbaij/seq/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/sbaij/seq/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/sbaij/mpi
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/sbaij/mpi/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/normal
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/normal/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/lrc
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/lrc/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/scatter
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/scatter/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/blockmat
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/blockmat/seq
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/composite
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/composite/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/mffd
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/mffd/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/mffd/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/transpose
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/transpose/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/python
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/submat
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/impls/submat/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/utils
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/utils/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/utils/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/matfd
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/matfd/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/matfd/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/partition
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/partition/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/partition/impls/pmetis
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/partition/impls/pmetis/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/partition/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/partition/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/order
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/order/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/order/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/color
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/color/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/f90-mod
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/mat/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/impls/basic
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/impls/basic/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/impls/mapping
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/impls/mapping/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/impls/mapping/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ao/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/src
+dalocal.c: In function ‘PetscErrorCode DAGetAdicMFArray4(DA, PetscTruth, void**, void**, PetscInt*)’:
+dalocal.c:875:34: warning: variable ‘zs’ set but not used [-Wunused-but-set-variable]
+   PetscInt       j,i,xs,ys,xm,ym,zs,zm,itdof = 0;
+                                  ^
+dalocal.c:875:37: warning: variable ‘zm’ set but not used [-Wunused-but-set-variable]
+   PetscInt       j,i,xs,ys,xm,ym,zs,zm,itdof = 0;
+                                     ^
+dalocal.c: In function ‘PetscErrorCode DAGetAdicMFArray9(DA, PetscTruth, void**, void**, PetscInt*)’:
+dalocal.c:967:34: warning: variable ‘zs’ set but not used [-Wunused-but-set-variable]
+   PetscInt       j,i,xs,ys,xm,ym,zs,zm,itdof = 0;
+                                  ^
+dalocal.c:967:37: warning: variable ‘zm’ set but not used [-Wunused-but-set-variable]
+   PetscInt       j,i,xs,ys,xm,ym,zs,zm,itdof = 0;
+                                     ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/src/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/src/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/src/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/utils
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/utils/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/utils/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/da/utils/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/adda
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/adda/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/adda/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/adda/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/f90-mod
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/dm/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/jacobi
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/jacobi/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/none
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/sor
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/sor/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/shell
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/shell/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/shell/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/bjacobi
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/bjacobi/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/bjacobi/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/mg
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/mg/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/mg/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/eisens
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/eisens/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/asm
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/asm/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/asm/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/ksp
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/ksp/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/composite
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/composite/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/composite/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/redundant
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/redundant/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/is
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/is/nn
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/pbjacobi
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/mat
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/tfs
+xxt.c: In function ‘PetscInt XXT_stats(xxt_ADT)’:
+xxt.c:162:18: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+   PetscErrorCode ierr;
+                  ^
+xyt.c: In function ‘PetscInt XYT_stats(xyt_ADT)’:
+xyt.c:170:18: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+   PetscErrorCode ierr;
+                  ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/fieldsplit
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/fieldsplit/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/factor
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/factor/lu
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/factor/ilu
+ilu.c: In function ‘PetscErrorCode PCSetFromOptions_ILU(PC)’:
+ilu.c:106:18: warning: variable ‘dt’ set but not used [-Wunused-but-set-variable]
+   PetscReal      dt[3];
+                  ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/factor/icc
+icc.c: In function ‘PetscErrorCode PCSetFromOptions_ICC(PC)’:
+icc.c:91:18: warning: variable ‘dt’ set but not used [-Wunused-but-set-variable]
+   PetscReal      dt[3];
+                  ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/factor/cholesky
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/factor/cholesky/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/factor/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/factor/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/galerkin
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/galerkin/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/openmp
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/asa
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/cp
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/bfbt
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/wb
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/wb/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/python
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/lsc
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/impls/redistribute
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/pc/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/interface/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cr
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/bcgs
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/bcgsl
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/bcgsl/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cg
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cg/cgne
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cg/gltr
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cg/gltr/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cg/nash
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cg/nash/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cg/stcg
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cg/stcg/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cg/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cgs
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/gmres
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/gmres/lgmres
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/gmres/fgmres
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/gmres/fgmres/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/gmres/fgmres/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/gmres/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cheby
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/cheby/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/rich
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/rich/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/lsqr
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/preonly
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/tcqmr
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/tfqmr
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/qcg
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/qcg/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/bicg
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/minres
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/symmlq
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/lcd
+lcd.c: In function ‘PetscErrorCode KSPSolve_LCD(KSP)’:
+lcd.c:46:46: warning: variable ‘pone’ set but not used [-Wunused-but-set-variable]
+   PetscScalar    alfa, beta, num, den, mone, pone;
+                                              ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/ibcgs
+ibcgs.c: In function ‘PetscErrorCode KSPSolve_IBCGS(KSP)’:
+ibcgs.c:61:32: warning: variable ‘rhon_1’ set but not used [-Wunused-but-set-variable]
+   PetscScalar    taun_1, taun, rhon_1, rhon, alphan_1, alphan, omegan_1, omegan;
+                                ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/python
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/broyden
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/impls/gcr
+gcr.c: In function ‘PetscErrorCode KSPSolve_GCR_cycle(KSP)’:
+gcr.c:29:18: warning: variable ‘b’ set but not used [-Wunused-but-set-variable]
+   Vec            b,x;        
+                  ^
+gcr.c: In function ‘PetscErrorCode KSPBuildSolution_GCR(KSP, Vec, _p_Vec**)’:
+gcr.c:289:20: warning: variable ‘ctx’ set but not used [-Wunused-but-set-variable]
+   KSP_GCR         *ctx;
+                    ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/utils
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/ksp/utils/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ksp/f90-mod
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/interface/noise
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/interface/f90-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/mf
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/mf/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls/ls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls/ls/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls/ls/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls/tr
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls/test
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls/picard
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls/python
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/examples/tutorials/ex10d
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/utils
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/utils/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/f90-mod
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/snes/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/interface
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/interface/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/explicit
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/explicit/euler
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/explicit/rk
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/explicit/rk/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/explicit/ssp
+ssp.c: In function ‘PetscErrorCode SSPStep_RK_10_4(TS, PetscReal, PetscReal, Vec)’:
+ssp.c:143:14: warning: variable ‘s’ set but not used [-Wunused-but-set-variable]
+   PetscInt i,s;
+              ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/implicit
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/implicit/beuler
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/implicit/cn
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/implicit/sundials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/implicit/sundials/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/implicit/sundials/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/implicit/theta
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/implicit/theta/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/implicit/gl
+gl.c: In function ‘PetscErrorCode TSStep_GL(TS, PetscInt*, PetscReal*)’:
+gl.c:847:30: warning: variable ‘b’ set but not used [-Wunused-but-set-variable]
+     const PetscScalar *c,*a,*b,*u,*v;
+                              ^
+gl.c:847:36: warning: variable ‘v’ set but not used [-Wunused-but-set-variable]
+     const PetscScalar *c,*a,*b,*u,*v;
+                                    ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/pseudo
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/pseudo/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/python
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/impls/python/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/examples
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/examples/tests
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/examples/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/ts/f90-mod
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/contrib
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/contrib/fun3d
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/contrib/fun3d/comp
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/contrib/fun3d/incomp
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/benchmarks
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/semiLagrange
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/semiLagrange/interface
+characteristic.c: In function ‘PetscErrorCode CharacteristicSolve(Characteristic, PetscReal, Vec)’:
+characteristic.c:341:30: warning: variable ‘ni’ set but not used [-Wunused-but-set-variable]
+   PetscInt                n, ni, nj, is, ie, js, je, qs, comp;
+                              ^
+characteristic.c:341:34: warning: variable ‘nj’ set but not used [-Wunused-but-set-variable]
+   PetscInt                n, ni, nj, is, ie, js, je, qs, comp;
+                                  ^
+characteristic.c:341:54: warning: variable ‘qs’ set but not used [-Wunused-but-set-variable]
+   PetscInt                n, ni, nj, is, ie, js, je, qs, comp;
+                                                      ^
+characteristic.c: In function ‘PetscInt DAGetNeighborRelative(DA, PetscReal, PetscReal)’:
+characteristic.c:875:18: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+   PetscErrorCode ierr;
+                  ^
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/semiLagrange/interface/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/semiLagrange/impls
+libfast in: /home/cml/Downloads/petsc-3.1-p8/src/semiLagrange/impls/da
+libfast in: /home/cml/Downloads/petsc-3.1-p8/include
+libfast in: /home/cml/Downloads/petsc-3.1-p8/include/finclude
+libfast in: /home/cml/Downloads/petsc-3.1-p8/include/finclude/ftn-auto
+libfast in: /home/cml/Downloads/petsc-3.1-p8/include/finclude/ftn-custom
+libfast in: /home/cml/Downloads/petsc-3.1-p8/include/private
+libfast in: /home/cml/Downloads/petsc-3.1-p8/include/sieve
+libfast in: /home/cml/Downloads/petsc-3.1-p8/tutorials
+libfast in: /home/cml/Downloads/petsc-3.1-p8/tutorials/multiphysics
+Completed building libraries
+=========================================
+Now to install the libraries do:
+make PETSC_DIR=/home/cml/Downloads/petsc-3.1-p8 PETSC_ARCH=linux-gnu-cxx-debug install
+=========================================
