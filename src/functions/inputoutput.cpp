@@ -243,8 +243,50 @@ int assign_params(int *argc, char *argv[], Parameter *p_param)
     else if (strcasecmp(key, "is_postprocessing") == 0){
       p_param->is_postprocessing = strtol( value, NULL, 10 );
     }
-
-  
+#ifdef TISSUE
+    else if (strcasecmp(key, "stimulus_duration") == 0) {
+      p_param->stim_dur = strtod( value, NULL);
+    }
+    else if (strcasecmp(key, "stimulus_amplitude_scale") == 0) {
+      p_param->stim_amp_scale = strtod( value, NULL);
+    }
+    else if (strcasecmp(key, "diffusion_scale") == 0) {
+      p_param->diffusion_scale = strtod( value, NULL);
+    }
+    else if (strcasecmp(key, "diffusion_scale_fiber") == 0) {
+      p_param->diffusion_scale_fiber = strtod( value, NULL);
+    }
+    else if (strcasecmp(key, "tmax") == 0) {
+      p_param->tmax = strtod( value, NULL);
+    }
+    else if (strcasecmp(key, "dimension") == 0) {
+      p_param->dimension = strtol( value, NULL, 10);
+    }
+    else if (strcasecmp(key, "mesh_type") == 0){
+      strncpy( p_param->mesh_type, value, sizeof(p_param->mesh_type));
+    }
+    else if (strcasecmp(key, "output_mesh_type") == 0){
+      strncpy( p_param->output_mesh_type, value, sizeof(p_param->output_mesh_type));
+    }
+    else if (strcasecmp(key, "fiber_mesh_file") == 0){
+      strncpy( p_param->fiber_mesh_file, value, sizeof(p_param->fiber_mesh_file));
+    }
+    else if (strcasecmp(key, "heart_mesh_file") == 0){
+      strncpy( p_param->heart_mesh_file, value, sizeof(p_param->heart_mesh_file));
+    }
+    else if (strcasecmp(key, "torso_mesh_file") == 0){
+      strncpy( p_param->torso_mesh_file, value, sizeof(p_param->torso_mesh_file));
+    }
+    else if (strcasecmp(key, "surface_mesh_file") == 0){
+      strncpy( p_param->surface_mesh_file, value, sizeof(p_param->surface_mesh_file));
+    }
+    else if (strcasecmp(key, "s1_nodes_file") == 0){
+      strncpy( p_param->s1_nodes_file, value, sizeof(p_param->s1_nodes_file));
+    }
+    else if (strcasecmp(key, "s2_nodes_file") == 0){
+      strncpy( p_param->s2_nodes_file, value, sizeof(p_param->s2_nodes_file));
+    }
+#endif
   }
 
   if( is_default == false ) fclose( fp_inputdeck );

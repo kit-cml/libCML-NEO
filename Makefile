@@ -1,6 +1,7 @@
 # Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)
 TARGET_EXEC_DYNAMIC := libcml.so
 TARGET_EXEC_STATIC := libcml.a
+#TARGET_EXEC_STATIC := libcml_2d3d.a
 
 BUILD_DIR := ./build
 SRC_DIRS := ./src
@@ -31,6 +32,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 # Flags for C++
 CXXFLAGS := -fPIC -fpermissive -std=c++11 -I/opt/prog/sundials/sundials-5.7.0/include
+#CXXFLAGS += -DTISSUE
 #CXXFLAGS := -fPIC -fpermissive
 
 # Flags for C

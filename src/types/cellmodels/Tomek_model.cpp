@@ -56,10 +56,10 @@
  * ALGEBRAIC[I_katp] is I_katp in component I_katp (microA_per_microF).
  * ALGEBRAIC[Istim] is Istim in component membrane (microA_per_microF).
  * CONSTANTS[stim_start] is stim_start in component membrane (millisecond).
- * CONSTANTS[i_Stim_End] is i_Stim_End in component membrane (millisecond).
- * CONSTANTS[i_Stim_Amplitude] is i_Stim_Amplitude in component membrane (microA_per_microF).
+ * CONSTANTS[stim_end] is stim_end in component membrane (millisecond).
+ * CONSTANTS[amp] is amp in component membrane (microA_per_microF).
  * CONSTANTS[BCL] is BCL in component membrane (millisecond).
- * CONSTANTS[i_Stim_PulseDuration] is i_Stim_PulseDuration in component membrane (millisecond).
+ * CONSTANTS[duration] is duration in component membrane (millisecond).
  * CONSTANTS[KmCaMK] is KmCaMK in component CaMK (millimolar).
  * CONSTANTS[aCaMK] is aCaMK in component CaMK (per_millimolar_per_millisecond).
  * CONSTANTS[bCaMK] is bCaMK in component CaMK (per_millisecond).
@@ -523,10 +523,13 @@ CONSTANTS[L] = 0.01;
 CONSTANTS[rad] = 0.0011;
 STATES[V] = (CONSTANTS[celltype]==1.00000 ?  -89.14 : CONSTANTS[celltype]==2.00000 ?  -89.1704 : -88.7638);
 CONSTANTS[stim_start] = 10;
-CONSTANTS[i_Stim_End] = 100000000000000000;
-CONSTANTS[i_Stim_Amplitude] = -53;
+#ifdef TISSUE
+CONSTANTS[stim_start] = 2;
+#endif
+CONSTANTS[stim_end] = 100000000000000000;
+CONSTANTS[amp] = -53;
 CONSTANTS[BCL] = 1000;
-CONSTANTS[i_Stim_PulseDuration] = 1.0;
+CONSTANTS[duration] = 1.0;
 CONSTANTS[KmCaMK] = 0.15;
 CONSTANTS[aCaMK] = 0.05;
 CONSTANTS[bCaMK] = 0.00068;
@@ -761,10 +764,10 @@ CONSTANTS[GKb] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[GKb_b]*0.600000 : CO
 CONSTANTS[upScale] = (CONSTANTS[celltype]==1.00000 ? 1.30000 : 1.00000);
 CONSTANTS[Gncx] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[Gncx_b]*1.10000 : CONSTANTS[celltype]==2.00000 ?  CONSTANTS[Gncx_b]*1.40000 : CONSTANTS[Gncx_b]);
 #ifdef TISSUE
-if(isS1) ALGEBRAIC[Istim] = CONSTANTS[amp];
+if(is_s1) ALGEBRAIC[Istim] = CONSTANTS[amp];
 else ALGEBRAIC[Istim] = 0.0;
 #else
-ALGEBRAIC[Istim] = (TIME>=CONSTANTS[stim_start]&&TIME<=CONSTANTS[i_Stim_End]&&(TIME - CONSTANTS[stim_start]) -  floor((TIME - CONSTANTS[stim_start])/CONSTANTS[BCL])*CONSTANTS[BCL]<=CONSTANTS[i_Stim_PulseDuration] ? CONSTANTS[i_Stim_Amplitude] : 0.00000);
+ALGEBRAIC[Istim] = (TIME>=CONSTANTS[stim_start]&&TIME<=CONSTANTS[stim_end]&&(TIME - CONSTANTS[stim_start]) -  floor((TIME - CONSTANTS[stim_start])/CONSTANTS[BCL])*CONSTANTS[BCL]<=CONSTANTS[duration] ? CONSTANTS[amp] : 0.00000);
 #endif
 ALGEBRAIC[hLss] = 1.00000/(1.00000+exp((STATES[V]+87.6100)/7.48800));
 ALGEBRAIC[hLssp] = 1.00000/(1.00000+exp((STATES[V]+93.8100)/7.48800));

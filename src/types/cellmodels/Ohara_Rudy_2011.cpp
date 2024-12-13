@@ -466,6 +466,9 @@ CONSTANTS[zk] = 1;
 CONSTANTS[L] = 0.01;
 CONSTANTS[rad] = 0.0011;
 CONSTANTS[stim_start] = 10.0;
+#ifdef TISSUE
+CONSTANTS[stim_start] = 2.0;
+#endif
 CONSTANTS[BCL] = 1000.0;
 STATES[V] = -87;
 CONSTANTS[amp] = -80;
@@ -704,7 +707,7 @@ CONSTANTS[upScale] = (CONSTANTS[celltype]==1.0000 ? 1.30000 : 1.00000);
 CONSTANTS[Gncx] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[Gncx_b]*1.10000 : CONSTANTS[celltype]==2.00000 ?  CONSTANTS[Gncx_b]*1.40000 : CONSTANTS[Gncx_b]);
 CONSTANTS[Pnak] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[Pnak_b]*0.900000 : CONSTANTS[celltype]==2.00000 ?  CONSTANTS[Pnak_b]*0.700000 : CONSTANTS[Pnak_b]);
 #ifdef TISSUE
-if(isS1) ALGEBRAIC[Istim] = CONSTANTS[amp];
+if(is_s1) ALGEBRAIC[Istim] = CONSTANTS[amp];
 else ALGEBRAIC[Istim] = 0.0;
 #else
 ALGEBRAIC[Istim] = (TIME>=CONSTANTS[stim_start] && (TIME - CONSTANTS[stim_start]) - floor((TIME - CONSTANTS[stim_start])/CONSTANTS[BCL])*CONSTANTS[BCL]<=CONSTANTS[duration] ? CONSTANTS[amp] : 0.000000);

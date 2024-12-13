@@ -38,12 +38,35 @@ struct Parameter
   char user_name[20];
   char steady_states_init_vals_file[100];
 
+#ifdef TISSUE
   // from this point on,
   // these parameters are belonging to
   // the 2D/3D simulations.
+  bool is_crt;
   bool is_ecg;
   bool is_bspm;
-  
+  bool is_lbbb;
+  bool is_rbbb;
+  bool is_s1s2;
+  bool is_using_output;
+  char fiber_mesh_dir[255];
+  char fiber_mesh_file[255];
+  char heart_mesh_file[255];
+  char torso_mesh_file[255];
+  char mesh_type[50];
+  char s1_nodes_file[255];
+  char s2_nodes_file[255];
+  char surface_mesh_file[255];
+  char output_mesh_type[50];
+  double diffusion_scale;
+  double diffusion_scale_fiber;
+  double apd_fiber;
+  double erp_fiber;
+  double twrite_vtk;
+  double tmax; // maximum simulation time for 2D/3D
+  int dimension;
+  int ecgnode[9];
+#endif  
 
   void init();
   void show_val();

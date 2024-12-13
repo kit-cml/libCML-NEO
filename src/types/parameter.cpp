@@ -39,9 +39,40 @@ void Parameter::init()
   snprintf(steady_states_init_vals_file, sizeof(steady_states_init_vals_file), "%s", "last_states_%hpaces_ord.dat",pace_max);
   snprintf(concs, sizeof(concs), "%s", "99.0");
 
+#ifdef TISSUE
+  is_crt = false;
   is_ecg = false;
   is_bspm = false;
-
+  is_lbbb = false;
+  is_rbbb = false;
+  is_s1s2 = false;
+  is_using_output = false;
+  diffusion_scale = 1.5;
+  diffusion_scale_fiber = 0.4;
+  apd_fiber = 300.;
+  erp_fiber = 350.;
+  twrite_vtk = 0.0;
+  tmax = 2000.0;
+  dimension = 3;
+  ecgnode[0]   = 472; // ECG nodes
+  ecgnode[1]   = 393;
+  ecgnode[2]   = 239;
+  ecgnode[3]   = 28;
+  ecgnode[4]   = 29;
+  ecgnode[5]   = 30;
+  ecgnode[6]   = 480;
+  ecgnode[7]   = 254;
+  ecgnode[8]   = 252;
+  snprintf(mesh_type, sizeof(mesh_type), "%s", "tet");
+  snprintf(output_mesh_type, sizeof(output_mesh_type), "%s", "surface");
+  snprintf(fiber_mesh_dir, sizeof(fiber_mesh_dir), "%s", "./mesh/human_hf_214319/purkinje");
+  snprintf(fiber_mesh_file, sizeof(fiber_mesh_file), "%s", "./mesh/human_hf_214319/purkinje/line.inp");
+  snprintf(heart_mesh_file, sizeof(fiber_mesh_file), "%s", "./mesh/human_hf_214319/heart_het.inp");
+  snprintf(torso_mesh_file, sizeof(fiber_mesh_file), "%s", "./mesh/torso/p+torso48_closed.inp");
+  snprintf(surface_mesh_file, sizeof(surface_mesh_file), "%s", "./mesh/human_hf_214319/surf.inp");
+  snprintf(s1_nodes_file, sizeof(s1_nodes_file), "%s", "./mesh/human_hf_214319/heart_apex.dat");
+  snprintf(s2_nodes_file, sizeof(s2_nodes_file), "%s", "./mesh/human_hf_214319/heart_L.dat");
+#endif
 }
 
 void Parameter::show_val()
@@ -78,8 +109,32 @@ void Parameter::show_val()
   mpi_printf( 0, "%s -- %s\n", "drug_name", drug_name);
   mpi_printf( 0, "%s -- %hd\n", "prior_risk", prior_risk);
   mpi_printf( 0, "%s -- %s\n", "concentrations", concs);
-
-
+#ifdef TISSUE
+  mpi_printf( 0, "%s -- %s\n", "is_crt", is_crt ? "true" : "false" );
   mpi_printf( 0, "%s -- %s\n", "is_ecg", is_ecg ? "true" : "false" );
   mpi_printf( 0, "%s -- %s\n", "is_bspm", is_bspm ? "true" : "false" );
+  mpi_printf( 0, "%s -- %s\n", "is_lbbb", is_lbbb ? "true" : "false" );
+  mpi_printf( 0, "%s -- %s\n", "is_rbbb", is_rbbb ? "true" : "false" );
+  mpi_printf( 0, "%s -- %s\n", "is_s1s2", is_s1s2 ? "true" : "false" );
+  mpi_printf( 0, "%s -- %s\n", "is_using_output", is_using_output ? "true" : "false" );
+  mpi_printf( 0, "%s -- %.2lf\n", "diffusion_scale", diffusion_scale );
+  mpi_printf( 0, "%s -- %.2lf\n", "diffusion_scale_fiber", diffusion_scale_fiber );
+  mpi_printf( 0, "%s -- %.2lf\n", "apd_fiber", apd_fiber );
+  mpi_printf( 0, "%s -- %.2lf\n", "erp_fiber", erp_fiber );
+  mpi_printf( 0, "%s -- %.2lf\n", "twrite_vtk", twrite_vtk );
+  mpi_printf( 0, "%s -- %.2lf\n", "tmax", tmax );
+  mpi_printf( 0, "%s -- %d\n", "dimension", dimension );
+  for( int idx = 0; idx < 9; idx++  ){
+    mpi_printf( 0, "ecgnode[%d] -- %d\n", idx, ecgnode[idx] );
+  }
+  mpi_printf( 0, "%s -- %s\n", "mesh_type", mesh_type );
+  mpi_printf( 0, "%s -- %s\n", "output_mesh_type", output_mesh_type );
+  mpi_printf( 0, "%s -- %s\n", "fiber_mesh_dir", fiber_mesh_dir );
+  mpi_printf( 0, "%s -- %s\n", "fiber_mesh_file", fiber_mesh_file );
+  mpi_printf( 0, "%s -- %s\n", "heart_mesh_file", heart_mesh_file );
+  mpi_printf( 0, "%s -- %s\n", "torso_mesh_file", torso_mesh_file );
+  mpi_printf( 0, "%s -- %s\n", "surface_mesh_file", surface_mesh_file );
+  mpi_printf( 0, "%s -- %s\n", "s1_nodes_file", s1_nodes_file );
+  mpi_printf( 0, "%s -- %s\n", "s2_nodes_file", s2_nodes_file );
+#endif
 }

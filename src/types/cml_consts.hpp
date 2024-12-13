@@ -30,6 +30,11 @@ namespace cml{
     static const int MASTER_NODE = 0;
   }
 
+  namespace tissue{
+    static const int VTK_SCALAR_OUTPUT_SIZE = 4;
+    static const char* VTK_SCALAR_OUTPUT_LABEL[4] = {"V","cai","qnet","qnet_apd"};
+  }
+
 }
 
 
