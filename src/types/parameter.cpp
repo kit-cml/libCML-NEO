@@ -31,6 +31,7 @@ void Parameter::init()
   gncx_scale = 1.;
   tau_h_scale = 1.;
   is_postprocessing = 0;
+  is_cvar = 0;
   snprintf(mutation_type, sizeof(mutation_type), "%s", "CTL");
   snprintf(user_name, sizeof(user_name), "%s", "johndoe");
   snprintf(hill_file, sizeof(hill_file), "%s", "./chantest_hill/bepridil/IC50_samples10.csv");
@@ -84,6 +85,7 @@ void Parameter::show_val()
   mpi_printf( 0, "%s -- %hd\n", "celltype", celltype);
   mpi_printf( 0, "%s -- %hd\n", "solver_type", solver_type);
   mpi_printf( 0, "%s -- %s\n", "is_postprocessing", is_postprocessing ? "true" : "false" );
+  mpi_printf( 0, "%s -- %s\n", "is_cvar", is_cvar ? "true" : "false" );
   mpi_printf( 0, "%s -- %lf\n", "basic_cycle_length", bcl);
   mpi_printf( 0, "%s -- %hd\n", "number_of_pacing", pace_max);
   mpi_printf( 0, "%s -- %lf\n", "time_step", dt);

@@ -18,9 +18,11 @@ namespace cml{
     // so it can compressed the file size.
     // Information of the scaling should be
     // described in the header result.
+    static const int METER_TO_MICROMETER = 1000000;
     static const int MILLI_TO_NANO = 1000000;
     static const int MICRO_TO_NANO = 1000;
     static const double SECOND_TO_MINUTE = 0.01666666667;
+    static const double MILLISECOND_TO_SECOND = 0.001;
   }
   
   namespace commons{

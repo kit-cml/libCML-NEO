@@ -1,7 +1,7 @@
 /*
    There are a total of 198 entries in the algebraic variable array.
    There are a total of 41 entries in each of the rate and state variable arrays.
-   There are a total of 139+2 entries in the constant variable array.
+   There are a total of 139 entries in the constant variable array.
  */
 
 #include "Ohara_Rudy_2011.hpp"
@@ -435,7 +435,7 @@
 Ohara_Rudy_2011::Ohara_Rudy_2011()
 {
   algebraic_size = 198;
-  constants_size = 144;
+  constants_size = 139+8;
   states_size = 41;
   ALGEBRAIC = new double[algebraic_size];
   CONSTANTS = new double[constants_size];
@@ -592,6 +592,7 @@ CONSTANTS[KmCap] = 0.0005;
 CONSTANTS[bt] = 4.75;
 STATES[Jrelnp] = 0;
 STATES[Jrelp] = 0;
+
 CONSTANTS[cmdnmax] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[cmdnmax_b]*1.30000 : CONSTANTS[cmdnmax_b]);
 CONSTANTS[Ahs] = 1.00000 - CONSTANTS[Ahf];
 CONSTANTS[thLp] =  3.00000*CONSTANTS[thL];
@@ -639,6 +640,11 @@ CONSTANTS[a2] = CONSTANTS[k2p];
 CONSTANTS[a4] = (( CONSTANTS[k4p]*CONSTANTS[MgATP])/CONSTANTS[Kmgatp])/(1.00000+CONSTANTS[MgATP]/CONSTANTS[Kmgatp]);
 CONSTANTS[Pnak] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[Pnak_b]*0.900000 : CONSTANTS[celltype]==2.00000 ?  CONSTANTS[Pnak_b]*0.700000 : CONSTANTS[Pnak_b]);
 CONSTANTS[tau_h_scale] = 1.;
+CONSTANTS[Jrel_b] = 1.5378;
+CONSTANTS[Jup_b] = 1.0;
+// CVAR: Additional scaling factor for Jleak and Jtr
+CONSTANTS[Jtr_b] = 1.0;	// Trans_Total (NSR to JSR translocation)
+CONSTANTS[Jleak_b] = 1.0;	// Leak_Total (Ca leak from NSR)
 }
 
 void Ohara_Rudy_2011::___applyDutta()
@@ -691,6 +697,29 @@ void Ohara_Rudy_2011::initConsts(double type, double conc, const double *hill, b
   ___applyDrugEffect(conc, hill);
   mpi_printf(0,"After drug: \nPCa:%lf \nGK1:%lf \nGKs:%lf \nGNa:%lf \nGNaL:%lf \nGto:%lf \nGKr:%lf\n",
       CONSTANTS[PCa_b], CONSTANTS[GK1_b], CONSTANTS[GKs_b], CONSTANTS[GNa], CONSTANTS[GNaL_b], CONSTANTS[Gto_b], CONSTANTS[GKr_b]);
+}
+
+void Ohara_Rudy_2011::___applyCVar(const double *cvar) {
+  CONSTANTS[GNa] *= cvar[0];		// GNa
+  CONSTANTS[GNaL_b] *= cvar[1];		// GNaL
+  CONSTANTS[Gto_b] *= cvar[2];		// Gto
+  CONSTANTS[GKr_b] *= cvar[3];		// GKr
+  CONSTANTS[GKs_b] *= cvar[4];		// GKs
+  CONSTANTS[GK1_b] *= cvar[5];		// GK1
+  CONSTANTS[Gncx_b] *= cvar[6];		// GNaCa
+  CONSTANTS[GKb_b] *= cvar[7];		// GKb
+  CONSTANTS[PCa] *= cvar[8];		// PCa
+  CONSTANTS[Pnak_b] *= cvar[9];		// INaK
+  CONSTANTS[PNab] *= cvar[10];		// PNab
+  CONSTANTS[PCab] *= cvar[11];		// PCab
+  CONSTANTS[GpCa] *= cvar[12];		// GpCa
+  CONSTANTS[KmCaMK] *= cvar[17];	// KCaMK
+
+  // Additional constants
+  CONSTANTS[Jrel_b] *= cvar[13];	// SERCA_Total (release)
+  CONSTANTS[Jup_b] *= cvar[14];	// RyR_Total (uptake)
+  CONSTANTS[Jtr_b] *= cvar[15];	// Trans_Total (NSR to JSR translocation)
+  CONSTANTS[Jleak_b] *= cvar[16];	// Leak_Total (Ca leak from NSR)
 }
 
 void Ohara_Rudy_2011::computeRates( double TIME, double *CONSTANTS, double *RATES, double *STATES, double *ALGEBRAIC )
@@ -899,15 +928,15 @@ ALGEBRAIC[IpCa] = ( CONSTANTS[GpCa]*STATES[cai])/(CONSTANTS[KmCap]+STATES[cai]);
 ALGEBRAIC[ICab] = ( CONSTANTS[PCab]*4.00000*ALGEBRAIC[vffrt]*( STATES[cai]*exp( 2.00000*ALGEBRAIC[vfrt]) -  0.341000*CONSTANTS[cao]))/(exp( 2.00000*ALGEBRAIC[vfrt]) - 1.00000);
 ALGEBRAIC[Jdiff] = (STATES[cass] - STATES[cai])/0.200000;
 ALGEBRAIC[fJrelp] = 1.00000/(1.00000+CONSTANTS[KmCaMK]/ALGEBRAIC[CaMKa]);
-ALGEBRAIC[Jrel] =  (1.00000 - ALGEBRAIC[fJrelp])*STATES[Jrelnp]+ ALGEBRAIC[fJrelp]*STATES[Jrelp];
+ALGEBRAIC[Jrel] =  CONSTANTS[Jrel_b] * (1.00000 - ALGEBRAIC[fJrelp])*STATES[Jrelnp]+ ALGEBRAIC[fJrelp]*STATES[Jrelp];
 ALGEBRAIC[Bcass] = 1.00000/(1.00000+( CONSTANTS[BSRmax]*CONSTANTS[KmBSR])/pow(CONSTANTS[KmBSR]+STATES[cass], 2.00000)+( CONSTANTS[BSLmax]*CONSTANTS[KmBSL])/pow(CONSTANTS[KmBSL]+STATES[cass], 2.00000));
 ALGEBRAIC[Jupnp] = ( CONSTANTS[upScale]*0.00437500*STATES[cai])/(STATES[cai]+0.000920000);
 ALGEBRAIC[Jupp] = ( CONSTANTS[upScale]*2.75000*0.00437500*STATES[cai])/((STATES[cai]+0.000920000) - 0.000170000);
 ALGEBRAIC[fJupp] = 1.00000/(1.00000+CONSTANTS[KmCaMK]/ALGEBRAIC[CaMKa]);
-ALGEBRAIC[Jleak] = ( 0.00393750*STATES[cansr])/15.0000;
-ALGEBRAIC[Jup] = ( (1.00000 - ALGEBRAIC[fJupp])*ALGEBRAIC[Jupnp]+ ALGEBRAIC[fJupp]*ALGEBRAIC[Jupp]) - ALGEBRAIC[Jleak];
+ALGEBRAIC[Jleak] = CONSTANTS[Jleak_b] *( 0.00393750*STATES[cansr])/15.0000;
+ALGEBRAIC[Jup] = CONSTANTS[Jup_b] * (( (1.00000 - ALGEBRAIC[fJupp])*ALGEBRAIC[Jupnp]+ ALGEBRAIC[fJupp]*ALGEBRAIC[Jupp]) - ALGEBRAIC[Jleak]);
 ALGEBRAIC[Bcai] = 1.00000/(1.00000+( CONSTANTS[cmdnmax]*CONSTANTS[kmcmdn])/pow(CONSTANTS[kmcmdn]+STATES[cai], 2.00000)+( CONSTANTS[trpnmax]*CONSTANTS[kmtrpn])/pow(CONSTANTS[kmtrpn]+STATES[cai], 2.00000));
-ALGEBRAIC[Jtr] = (STATES[cansr] - STATES[cajsr])/100.000;
+ALGEBRAIC[Jtr] = CONSTANTS[Jtr_b] * (STATES[cansr] - STATES[cajsr])/100.000;
 ALGEBRAIC[Bcajsr] = 1.00000/(1.00000+( CONSTANTS[csqnmax]*CONSTANTS[kmcsqn])/pow(CONSTANTS[kmcsqn]+STATES[cajsr], 2.00000));
 
 RATES[hL] = (ALGEBRAIC[hLss] - STATES[hL])/CONSTANTS[thL];

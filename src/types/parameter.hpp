@@ -37,6 +37,7 @@ struct Parameter
   char concs[50];
   char user_name[20];
   char steady_states_init_vals_file[100];
+  bool is_cvar;
 
 #ifdef TISSUE
   // from this point on,

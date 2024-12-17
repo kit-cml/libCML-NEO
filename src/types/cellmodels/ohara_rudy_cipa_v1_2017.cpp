@@ -456,7 +456,7 @@
  * CONSTANTS[a_relp] is a_relp in component ryr (millisecond).
  * ALGEBRAIC[Jrel_inf_temp] is Jrel_inf_temp in component ryr (dimensionless).
  * ALGEBRAIC[fJrelp] is fJrelp in component ryr (dimensionless).
- * CONSTANTS[Jrel_scaling_factor] is Jrel_scaling_factor in component ryr (dimensionless).
+ * CONSTANTS[Jrel_b] is Jrel_b in component ryr (dimensionless).
  * ALGEBRAIC[tau_rel_temp] is tau_rel_temp in component ryr (millisecond).
  * ALGEBRAIC[tau_relp_temp] is tau_relp_temp in component ryr (millisecond).
  * CONSTANTS[upScale] is upScale in component SERCA (dimensionless).
@@ -520,7 +520,7 @@
 ohara_rudy_cipa_v1_2017::ohara_rudy_cipa_v1_2017()
 {
   algebraic_size = 200;
-  constants_size = 206;
+  constants_size = 206+2;
   states_size = 49;
   ALGEBRAIC = new double[algebraic_size];
   CONSTANTS = new double[constants_size];
@@ -737,8 +737,11 @@ CONSTANTS[KmCap] = 0.0005;
 CONSTANTS[bt] = 4.75;
 STATES[Jrelnp] = 2.5e-7;
 STATES[Jrelp] = 3.12e-7;
-CONSTANTS[Jrel_scaling_factor] = 1.0;
+CONSTANTS[Jrel_b] = 1.0;
 CONSTANTS[Jup_b] = 1.0;
+// CVAR: 2 scaling factor to satisfy CVar (Jtr and Jleak)
+CONSTANTS[Jtr_b] = 1.0;
+CONSTANTS[Jleak_b] = 1.0;
 CONSTANTS[frt] = CONSTANTS[F]/( CONSTANTS[R]*CONSTANTS[T]);
 CONSTANTS[cmdnmax] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[cmdnmax_b]*1.30000 : CONSTANTS[cmdnmax_b]);
 CONSTANTS[Ahs] = 1.00000 - CONSTANTS[Ahf];
@@ -796,6 +799,30 @@ CONSTANTS[b1] =  CONSTANTS[k1m]*CONSTANTS[MgADP];
 CONSTANTS[a2] = CONSTANTS[k2p];
 CONSTANTS[a4] = (( CONSTANTS[k4p]*CONSTANTS[MgATP])/CONSTANTS[Kmgatp])/(1.00000+CONSTANTS[MgATP]/CONSTANTS[Kmgatp]);
 CONSTANTS[Pnak] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[Pnak_b]*0.900000 : CONSTANTS[celltype]==2.00000 ?  CONSTANTS[Pnak_b]*0.700000 : CONSTANTS[Pnak_b]);
+}
+
+void ohara_rudy_cipa_v1_2017::___applyCVar(const double *cvar)
+{
+  CONSTANTS[GNa] *= cvar[0];		// GNa
+  CONSTANTS[GNaL_b] *= cvar[1];		// GNaL
+  CONSTANTS[Gto_b] *= cvar[2];		// Gto
+  CONSTANTS[GKr_b] *= cvar[3];		// GKr
+  CONSTANTS[GKs_b] *= cvar[4];		// GKs
+  CONSTANTS[GK1_b] *= cvar[5];		// GK1
+  CONSTANTS[Gncx_b] *= cvar[6];		// GNaCa
+  CONSTANTS[GKb_b] *= cvar[7];		// GKb
+  CONSTANTS[PCa] *= cvar[8];		// PCa
+  CONSTANTS[Pnak_b] *= cvar[9];		// INaK
+  CONSTANTS[PNab] *= cvar[10];		// PNab
+  CONSTANTS[PCab] *= cvar[11];		// PCab
+  CONSTANTS[GpCa] *= cvar[12];		// GpCa
+  CONSTANTS[KmCaMK] *= cvar[17];	// KCaMK
+
+  // Additional constants
+  CONSTANTS[Jrel_b] *= cvar[13];	// SERCA_Total (release)
+  CONSTANTS[Jup_b] *= cvar[14];	// RyR_Total (uptake)
+  CONSTANTS[Jtr_b] *= cvar[15];	// Trans_Total (NSR to JSR translocation)
+  CONSTANTS[Jleak_b] *= cvar[16];	// Leak_Total (Ca leak from NSR)
 }
 
 void ohara_rudy_cipa_v1_2017::___applyDrugEffect(double conc, const double *hill)
@@ -856,6 +883,15 @@ void ohara_rudy_cipa_v1_2017::initConsts(double type, double conc, const double 
   mpi_printf(0,"\n");
   mpi_printf(0,"Bootstraped hERG binding: \nKmax:%lf \nKu:%lf \nn:%lf \nhalfmax:%lf \nVhalf:%lf \nD:%lf \nKt:%lf\n",
       CONSTANTS[Kmax], CONSTANTS[Ku], CONSTANTS[n], CONSTANTS[halfmax], CONSTANTS[Vhalf], STATES[D], CONSTANTS[Kt]);
+}
+
+void ohara_rudy_cipa_v1_2017::initConsts(double type, double conc, const double *hill, const double *herg, const double *cvar)
+{
+  initConsts(type, conc, hill, herg);
+  
+  mpi_printf(0,"Implementing Inter-individual Variability\n");
+  ___applyCVar(cvar);
+
 }
 
 void ohara_rudy_cipa_v1_2017::computeRates( double TIME, double *CONSTANTS, double *RATES, double *STATES, double *ALGEBRAIC )
@@ -1067,15 +1103,15 @@ ALGEBRAIC[U_Cab] =  CONSTANTS[B_Cab]*(STATES[V] - CONSTANTS[v0_Cab]);
 ALGEBRAIC[ICab] = (- 1.00000e-07<=ALGEBRAIC[U_Cab]&&ALGEBRAIC[U_Cab]<=1.00000e-07 ?  ALGEBRAIC[A_Cab]*(1.00000 -  0.500000*ALGEBRAIC[U_Cab]) : ( ALGEBRAIC[A_Cab]*ALGEBRAIC[U_Cab])/(exp(ALGEBRAIC[U_Cab]) - 1.00000));
 ALGEBRAIC[Jdiff] = (STATES[cass] - STATES[cai])/0.200000;
 ALGEBRAIC[fJrelp] = 1.00000/(1.00000+CONSTANTS[KmCaMK]/ALGEBRAIC[CaMKa]);
-ALGEBRAIC[Jrel] =  CONSTANTS[Jrel_scaling_factor]*( (1.00000 - ALGEBRAIC[fJrelp])*STATES[Jrelnp]+ ALGEBRAIC[fJrelp]*STATES[Jrelp]);
+ALGEBRAIC[Jrel] =  CONSTANTS[Jrel_b]*( (1.00000 - ALGEBRAIC[fJrelp])*STATES[Jrelnp]+ ALGEBRAIC[fJrelp]*STATES[Jrelp]);
 ALGEBRAIC[Bcass] = 1.00000/(1.00000+( CONSTANTS[BSRmax]*CONSTANTS[KmBSR])/pow(CONSTANTS[KmBSR]+STATES[cass], 2.00000)+( CONSTANTS[BSLmax]*CONSTANTS[KmBSL])/pow(CONSTANTS[KmBSL]+STATES[cass], 2.00000));
 ALGEBRAIC[Jupnp] = ( CONSTANTS[upScale]*0.00437500*STATES[cai])/(STATES[cai]+0.000920000);
 ALGEBRAIC[Jupp] = ( CONSTANTS[upScale]*2.75000*0.00437500*STATES[cai])/((STATES[cai]+0.000920000) - 0.000170000);
 ALGEBRAIC[fJupp] = 1.00000/(1.00000+CONSTANTS[KmCaMK]/ALGEBRAIC[CaMKa]);
-ALGEBRAIC[Jleak] = ( 0.00393750*STATES[cansr])/15.0000;
+ALGEBRAIC[Jleak] = CONSTANTS[Jleak_b] * ( 0.00393750*STATES[cansr])/15.0000;
 ALGEBRAIC[Jup] =  CONSTANTS[Jup_b]*(( (1.00000 - ALGEBRAIC[fJupp])*ALGEBRAIC[Jupnp]+ ALGEBRAIC[fJupp]*ALGEBRAIC[Jupp]) - ALGEBRAIC[Jleak]);
 ALGEBRAIC[Bcai] = 1.00000/(1.00000+( CONSTANTS[cmdnmax]*CONSTANTS[kmcmdn])/pow(CONSTANTS[kmcmdn]+STATES[cai], 2.00000)+( CONSTANTS[trpnmax]*CONSTANTS[kmtrpn])/pow(CONSTANTS[kmtrpn]+STATES[cai], 2.00000));
-ALGEBRAIC[Jtr] = (STATES[cansr] - STATES[cajsr])/100.000;
+ALGEBRAIC[Jtr] = CONSTANTS[Jtr_b] * (STATES[cansr] - STATES[cajsr])/100.000;
 ALGEBRAIC[Bcajsr] = 1.00000/(1.00000+( CONSTANTS[csqnmax]*CONSTANTS[kmcsqn])/pow(CONSTANTS[kmcsqn]+STATES[cajsr], 2.00000));
 
 //RATES[D] = CONSTANTS[cnc];

@@ -348,6 +348,10 @@ enum E_CONSTANTS_T{
   BCL = 140,
   stim_end = 141,
   tau_h_scale = 142,
+  Jrel_b = 143,
+  Jup_b = 144,
+  Jtr_b = 145,
+  Jleak_b = 146,
 };
 
 enum E_STATES_T{

@@ -353,7 +353,7 @@ enum E_CONSTANTS_T{
   GpCa = 144,
   KmCap = 145,
   bt = 146,
-  Jrel_scaling_factor = 147,
+  Jrel_b = 147,
   Jup_b = 148,
   frt = 149,
   cmdnmax = 150,
@@ -412,6 +412,8 @@ enum E_CONSTANTS_T{
   a4 = 203,
   Pnak = 204,
   cnc = 205,
+  Jtr_b = 206,
+  Jleak_b = 207,
 };
 
 

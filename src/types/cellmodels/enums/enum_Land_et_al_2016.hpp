@@ -39,13 +39,14 @@ enum E_ALGEBRAIC_T{
   v_R_UW = 34,
   v_R_WS = 35,
   v_R_SU = 36,
+  lmbda = 37,
 };
 
 
 enum E_CONSTANTS_T{
   n_CaTRPN = 0,
-  stimPeriod = 1,
-  stimDuration = 2,
+  BCL = 1,
+  duration = 2,
   V_max = 3,
   kappa_R_TRPNCa = 4,
   kappa_R_BU = 5,

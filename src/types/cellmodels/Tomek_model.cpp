@@ -489,7 +489,7 @@
 Tomek_model::Tomek_model()
 {
   algebraic_size = 223;
-  constants_size = 163;
+  constants_size = 163+2; // Add 2 constant for scaling factor, Jtr and Jleak
   states_size = 43;
   ALGEBRAIC = new double[algebraic_size];
   CONSTANTS = new double[constants_size];
@@ -665,6 +665,9 @@ STATES[Jrel_p] = (CONSTANTS[celltype]==1.00000 ? 0. : CONSTANTS[celltype]==2.000
 CONSTANTS[cajsr_half] = 1.7;
 CONSTANTS[Jrel_b] = 1.5378;
 CONSTANTS[Jup_b] = 1.0;
+// CVAR: Additional scaling factor for Jleak and Jtr
+CONSTANTS[Jtr_b] = 1.0;	// Trans_Total (NSR to JSR translocation)
+CONSTANTS[Jleak_b] = 1.0;	// Leak_Total (Ca leak from NSR)
 CONSTANTS[vcell] =  1000.00*3.14000*CONSTANTS[rad]*CONSTANTS[rad]*CONSTANTS[L];
 CONSTANTS[cmdnmax] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[cmdnmax_b]*1.30000 : CONSTANTS[cmdnmax_b]);
 CONSTANTS[ECl] =  (( CONSTANTS[R]*CONSTANTS[T])/( CONSTANTS[zcl]*CONSTANTS[F]))*log(CONSTANTS[clo]/CONSTANTS[cli]);
@@ -718,6 +721,29 @@ CONSTANTS[a4] = (( CONSTANTS[k4p]*CONSTANTS[MgATP])/CONSTANTS[Kmgatp])/(1.00000+
 CONSTANTS[Pnak] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[Pnak_b]*0.900000 : CONSTANTS[celltype]==2.00000 ?  CONSTANTS[Pnak_b]*0.700000 : CONSTANTS[Pnak_b]);
 }
 
+void Tomek_model::___applyCVar(const double *cvar) {
+  CONSTANTS[GNa] *= cvar[0];		// GNa
+  CONSTANTS[GNaL_b] *= cvar[1];		// GNaL
+  CONSTANTS[Gto_b] *= cvar[2];		// Gto
+  CONSTANTS[GKr_b] *= cvar[3];		// GKr
+  CONSTANTS[GKs_b] *= cvar[4];		// GKs
+  CONSTANTS[GK1_b] *= cvar[5];		// GK1
+  CONSTANTS[Gncx_b] *= cvar[6];		// GNaCa
+  CONSTANTS[GKb_b] *= cvar[7];		// GKb
+  CONSTANTS[PCa] *= cvar[8];		// PCa
+  CONSTANTS[Pnak_b] *= cvar[9];		// INaK
+  CONSTANTS[PNab] *= cvar[10];		// PNab
+  CONSTANTS[PCab] *= cvar[11];		// PCab
+  CONSTANTS[GpCa] *= cvar[12];		// GpCa
+  CONSTANTS[KmCaMK] *= cvar[17];	// KCaMK
+
+  // Additional constants
+  CONSTANTS[Jrel_b] *= cvar[13];	// SERCA_Total (release)
+  CONSTANTS[Jup_b] *= cvar[14];	// RyR_Total (uptake)
+  CONSTANTS[Jtr_b] *= cvar[15];	// Trans_Total (NSR to JSR translocation)
+  CONSTANTS[Jleak_b] *= cvar[16];	// Leak_Total (Ca leak from NSR)
+}
+
 void Tomek_model::___applyDrugEffect(double conc, const double *hill)
 {
 CONSTANTS[PCa_b] = CONSTANTS[PCa_b] * ((hill[0] > 10E-14 && hill[1] > 10E-14) ? 1./(1.+pow(conc/hill[0],hill[1])) : 1.);
@@ -763,6 +789,7 @@ CONSTANTS[GK1] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[GK1_b]*1.20000 : CON
 CONSTANTS[GKb] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[GKb_b]*0.600000 : CONSTANTS[GKb_b]);
 CONSTANTS[upScale] = (CONSTANTS[celltype]==1.00000 ? 1.30000 : 1.00000);
 CONSTANTS[Gncx] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[Gncx_b]*1.10000 : CONSTANTS[celltype]==2.00000 ?  CONSTANTS[Gncx_b]*1.40000 : CONSTANTS[Gncx_b]);
+CONSTANTS[Pnak] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[Pnak_b]*0.900000 : CONSTANTS[celltype]==2.00000 ?  CONSTANTS[Pnak_b]*0.700000 : CONSTANTS[Pnak_b]);
 #ifdef TISSUE
 if(is_s1) ALGEBRAIC[Istim] = CONSTANTS[amp];
 else ALGEBRAIC[Istim] = 0.0;
@@ -986,10 +1013,10 @@ ALGEBRAIC[IClb] =  CONSTANTS[GClb]*(STATES[V] - CONSTANTS[ECl]);
 ALGEBRAIC[Jupnp] = ( CONSTANTS[upScale]*0.00542500*STATES[cai])/(STATES[cai]+0.000920000);
 ALGEBRAIC[Jupp] = ( CONSTANTS[upScale]*2.75000*0.00542500*STATES[cai])/((STATES[cai]+0.000920000) - 0.000170000);
 ALGEBRAIC[fJupp] = 1.00000/(1.00000+CONSTANTS[KmCaMK]/ALGEBRAIC[CaMKa]);
-ALGEBRAIC[Jleak] = ( 0.00488250*STATES[cansr])/15.0000;
+ALGEBRAIC[Jleak] = CONSTANTS[Jleak_b] * ( 0.00488250*STATES[cansr])/15.0000;
 ALGEBRAIC[Jup] =  CONSTANTS[Jup_b]*(( (1.00000 - ALGEBRAIC[fJupp])*ALGEBRAIC[Jupnp]+ ALGEBRAIC[fJupp]*ALGEBRAIC[Jupp]) - ALGEBRAIC[Jleak]);
 ALGEBRAIC[Bcai] = 1.00000/(1.00000+( CONSTANTS[cmdnmax]*CONSTANTS[kmcmdn])/pow(CONSTANTS[kmcmdn]+STATES[cai], 2.00000)+( CONSTANTS[trpnmax]*CONSTANTS[kmtrpn])/pow(CONSTANTS[kmtrpn]+STATES[cai], 2.00000));
-ALGEBRAIC[Jtr] = (STATES[cansr] - STATES[cajsr])/60.0000;
+ALGEBRAIC[Jtr] = CONSTANTS[Jtr_b]*  (STATES[cansr] - STATES[cajsr])/60.0000;
 ALGEBRAIC[Bcajsr] = 1.00000/(1.00000+( CONSTANTS[csqnmax]*CONSTANTS[kmcsqn])/pow(CONSTANTS[kmcsqn]+STATES[cajsr], 2.00000));
 
 RATES[hL] = (ALGEBRAIC[hLss] - STATES[hL])/CONSTANTS[thL];

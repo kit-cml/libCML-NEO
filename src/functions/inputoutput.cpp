@@ -243,13 +243,16 @@ int assign_params(int *argc, char *argv[], Parameter *p_param)
     else if (strcasecmp(key, "is_postprocessing") == 0){
       p_param->is_postprocessing = strtol( value, NULL, 10 );
     }
-#ifdef TISSUE
+    else if (strcasecmp(key, "is_cvar") == 0){
+      p_param->is_cvar = strtol( value, NULL, 10 );
+    }
     else if (strcasecmp(key, "stimulus_duration") == 0) {
       p_param->stim_dur = strtod( value, NULL);
     }
     else if (strcasecmp(key, "stimulus_amplitude_scale") == 0) {
       p_param->stim_amp_scale = strtod( value, NULL);
     }
+#ifdef TISSUE
     else if (strcasecmp(key, "diffusion_scale") == 0) {
       p_param->diffusion_scale = strtod( value, NULL);
     }

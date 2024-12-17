@@ -34,6 +34,7 @@ public:
   virtual void initConsts(double type, double conc, const double *hill){}
   virtual void initConsts(double type, double conc, const double *hill, bool is_dutta){}
   virtual void initConsts(double type, double conc, const double *hill, const double* herg){}
+  virtual void initConsts(double type, double conc, const double *hill, const double* herg, const double* cvar){}
   virtual void computeRates(double TIME, double *CONSTANTS, double *RATES, double *STATES, double *ALGEBRAIC) = 0;
   virtual void solveAnalytical(double dt) {};
   virtual double set_time_step(double TIME,double time_point, 

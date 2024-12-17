@@ -1,5 +1,5 @@
 /*
-   There are a total of 37 entries in the algebraic variable array.
+   There are a total of 37+1 entries in the algebraic variable array.
    There are a total of 11 entries in each of the rate and state variable arrays.
    There are a total of 39 entries in the constant variable array.
  */
@@ -26,8 +26,8 @@
  * ALGEBRAIC[T_total] is T_total in component crossbridge_TRPN (kPa).
  * STATES[SL] is SL in component crossbridge_TRPN (metre).
  * ALGEBRAIC[v_Ca_stim] is v_Ca_stim in component environment (fmol_per_sec).
- * CONSTANTS[stimPeriod] is stimPeriod in component environment (second).
- * CONSTANTS[stimDuration] is stimDuration in component environment (second).
+ * CONSTANTS[BCL] is BCL in component environment (second).
+ * CONSTANTS[duration] is duration in component environment (second).
  * ALGEBRAIC[tPeriod] is tPeriod in component environment (second).
  * ALGEBRAIC[dSL] is dSL in component environment (m_per_s).
  * CONSTANTS[V_max] is V_max in component environment (m_per_s).
@@ -113,7 +113,7 @@
 
 Land_et_al_2016::Land_et_al_2016()
 {
-algebraic_size = 37;
+algebraic_size = 37+1;
 constants_size = 39;
 states_size = 11;
 ALGEBRAIC = new double[algebraic_size];
@@ -141,8 +141,8 @@ STATES[q_U_XB] = 0;
 STATES[q_W_XB] = 0;
 STATES[q_S_XB] = 0;
 STATES[SL] = 2e-6;
-CONSTANTS[stimPeriod] = 1;
-CONSTANTS[stimDuration] = 0.001;
+CONSTANTS[BCL] = 1;
+CONSTANTS[duration] = 0.001;
 CONSTANTS[V_max] = 19e-6;
 CONSTANTS[kappa_R_TRPNCa] = 22.8658;
 CONSTANTS[kappa_R_BU] = 2.56831;
@@ -193,8 +193,8 @@ ALGEBRAIC[mu_TRPN] =  CONSTANTS[R]*CONSTANTS[T]*log( CONSTANTS[K_TRPN]*STATES[q_
 ALGEBRAIC[mu_Ca_i] =  CONSTANTS[R]*CONSTANTS[T]*log( CONSTANTS[K_Ca_i]*STATES[q_Ca_i]);
 ALGEBRAIC[mu_Ca_TRPN] =  CONSTANTS[R]*CONSTANTS[T]*log( CONSTANTS[K_Ca_TRPN]*STATES[q_Ca_TRPN]);
 ALGEBRAIC[v_R_TRPNCa] =  CONSTANTS[kappa_R_TRPNCa]*(exp(( CONSTANTS[n_CaTRPN]*ALGEBRAIC[mu_Ca_i]+ALGEBRAIC[mu_TRPN])/( CONSTANTS[R]*CONSTANTS[T])) - exp(ALGEBRAIC[mu_Ca_TRPN]/( CONSTANTS[R]*CONSTANTS[T])));
-ALGEBRAIC[tPeriod] = TIME -  floor(TIME/CONSTANTS[stimPeriod])*CONSTANTS[stimPeriod];
-ALGEBRAIC[v_Ca_stim] = (ALGEBRAIC[tPeriod]>=0.300000&&ALGEBRAIC[tPeriod]<=0.300000+CONSTANTS[stimDuration] ?  1.00000*80.0000 : 0.00000);
+ALGEBRAIC[tPeriod] = TIME -  floor(TIME/CONSTANTS[BCL])*CONSTANTS[BCL];
+ALGEBRAIC[v_Ca_stim] = (ALGEBRAIC[tPeriod]>=0.300000&&ALGEBRAIC[tPeriod]<=0.300000+CONSTANTS[duration] ?  1.00000*80.0000 : 0.00000);
 ALGEBRAIC[nu_2] =  - CONSTANTS[A_w]*ALGEBRAIC[v_2];
 ALGEBRAIC[nu_3] =  CONSTANTS[c_w]*STATES[G_w];
 ALGEBRAIC[nu_1] = - ALGEBRAIC[nu_2] - ALGEBRAIC[nu_3];
@@ -219,6 +219,7 @@ ALGEBRAIC[F_T_W] =  (CONSTANTS[T_ref]/( CONSTANTS[SL_0]*CONSTANTS[q_MS]*CONSTANT
 ALGEBRAIC[T_active] = ALGEBRAIC[F_T_S]+ALGEBRAIC[F_T_W];
 ALGEBRAIC[nu_k] =  (CONSTANTS[k]/ALGEBRAIC[eta])*STATES[C_d];
 ALGEBRAIC[nu_f] =  (CONSTANTS[k]/ALGEBRAIC[eta])*(STATES[SL] - CONSTANTS[SL_0]);
+ALGEBRAIC[lmbda] = STATES[SL]/CONSTANTS[SL_0];
 ALGEBRAIC[F_1] =  CONSTANTS[alpha]*(exp(( CONSTANTS[b]*STATES[SL])/CONSTANTS[SL_0]) - 1.00000);
 ALGEBRAIC[nu_d] = - ALGEBRAIC[nu_k]+ALGEBRAIC[nu_f];
 ALGEBRAIC[F_d] =  (( CONSTANTS[alpha]*ALGEBRAIC[eta])/CONSTANTS[SL_0])*ALGEBRAIC[v_Cdd];
