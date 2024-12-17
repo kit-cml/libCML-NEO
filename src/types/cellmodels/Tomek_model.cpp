@@ -777,6 +777,15 @@ void Tomek_model::initConsts(double type, double conc, const double *hill)
       CONSTANTS[PCa_b], CONSTANTS[GK1_b], CONSTANTS[GKs_b], CONSTANTS[GNa], CONSTANTS[GNaL_b], CONSTANTS[Gto_b], CONSTANTS[GKr_b]);
 }
 
+void Tomek_model::initConsts(double type, double conc, const double *hill, const double *cvar)
+{
+  initConsts(type, conc, hill);
+
+  mpi_printf(0,"Implementing Inter-individual Variability\n");
+  ___applyCVar(cvar);
+
+}
+
 void Tomek_model::computeRates( double TIME, double *CONSTANTS, double *RATES, double *STATES, double *ALGEBRAIC )
 {
 CONSTANTS[cmdnmax] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[cmdnmax_b]*1.30000 : CONSTANTS[cmdnmax_b]);

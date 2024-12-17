@@ -647,6 +647,29 @@ CONSTANTS[Jtr_b] = 1.0;	// Trans_Total (NSR to JSR translocation)
 CONSTANTS[Jleak_b] = 1.0;	// Leak_Total (Ca leak from NSR)
 }
 
+void Ohara_Rudy_2011::___applyCVar(const double *cvar) {
+  CONSTANTS[GNa] *= cvar[0];		// GNa
+  CONSTANTS[GNaL_b] *= cvar[1];		// GNaL
+  CONSTANTS[Gto_b] *= cvar[2];		// Gto
+  CONSTANTS[GKr_b] *= cvar[3];		// GKr
+  CONSTANTS[GKs_b] *= cvar[4];		// GKs
+  CONSTANTS[GK1_b] *= cvar[5];		// GK1
+  CONSTANTS[Gncx_b] *= cvar[6];		// GNaCa
+  CONSTANTS[GKb_b] *= cvar[7];		// GKb
+  CONSTANTS[PCa] *= cvar[8];		// PCa
+  CONSTANTS[Pnak_b] *= cvar[9];		// INaK
+  CONSTANTS[PNab] *= cvar[10];		// PNab
+  CONSTANTS[PCab] *= cvar[11];		// PCab
+  CONSTANTS[GpCa] *= cvar[12];		// GpCa
+  CONSTANTS[KmCaMK] *= cvar[17];	// KCaMK
+
+  // Additional constants
+  CONSTANTS[Jrel_b] *= cvar[13];	// SERCA_Total (release)
+  CONSTANTS[Jup_b] *= cvar[14];	// RyR_Total (uptake)
+  CONSTANTS[Jtr_b] *= cvar[15];	// Trans_Total (NSR to JSR translocation)
+  CONSTANTS[Jleak_b] *= cvar[16];	// Leak_Total (Ca leak from NSR)
+}
+
 void Ohara_Rudy_2011::___applyDutta()
 {
 CONSTANTS[GKs_b] *= 1.870;
@@ -699,28 +722,15 @@ void Ohara_Rudy_2011::initConsts(double type, double conc, const double *hill, b
       CONSTANTS[PCa_b], CONSTANTS[GK1_b], CONSTANTS[GKs_b], CONSTANTS[GNa], CONSTANTS[GNaL_b], CONSTANTS[Gto_b], CONSTANTS[GKr_b]);
 }
 
-void Ohara_Rudy_2011::___applyCVar(const double *cvar) {
-  CONSTANTS[GNa] *= cvar[0];		// GNa
-  CONSTANTS[GNaL_b] *= cvar[1];		// GNaL
-  CONSTANTS[Gto_b] *= cvar[2];		// Gto
-  CONSTANTS[GKr_b] *= cvar[3];		// GKr
-  CONSTANTS[GKs_b] *= cvar[4];		// GKs
-  CONSTANTS[GK1_b] *= cvar[5];		// GK1
-  CONSTANTS[Gncx_b] *= cvar[6];		// GNaCa
-  CONSTANTS[GKb_b] *= cvar[7];		// GKb
-  CONSTANTS[PCa] *= cvar[8];		// PCa
-  CONSTANTS[Pnak_b] *= cvar[9];		// INaK
-  CONSTANTS[PNab] *= cvar[10];		// PNab
-  CONSTANTS[PCab] *= cvar[11];		// PCab
-  CONSTANTS[GpCa] *= cvar[12];		// GpCa
-  CONSTANTS[KmCaMK] *= cvar[17];	// KCaMK
+void Ohara_Rudy_2011::initConsts(double type, double conc, const double *hill, const double *cvar)
+{
+  initConsts(type, conc, hill, true);
 
-  // Additional constants
-  CONSTANTS[Jrel_b] *= cvar[13];	// SERCA_Total (release)
-  CONSTANTS[Jup_b] *= cvar[14];	// RyR_Total (uptake)
-  CONSTANTS[Jtr_b] *= cvar[15];	// Trans_Total (NSR to JSR translocation)
-  CONSTANTS[Jleak_b] *= cvar[16];	// Leak_Total (Ca leak from NSR)
+  mpi_printf(0,"Implementing Inter-individual Variability\n");
+  ___applyCVar(cvar);
+
 }
+
 
 void Ohara_Rudy_2011::computeRates( double TIME, double *CONSTANTS, double *RATES, double *STATES, double *ALGEBRAIC )
 {
