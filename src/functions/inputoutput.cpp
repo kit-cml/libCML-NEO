@@ -20,7 +20,13 @@
 #endif
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifdef _WIN32
+#include <io.h>
+#define access _access
+#else
 #include <unistd.h>
+#endif
+
 
 void mpi_printf(short node_id, const char *fmt, ...)
 {
