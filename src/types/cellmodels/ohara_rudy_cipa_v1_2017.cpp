@@ -811,7 +811,7 @@ void ohara_rudy_cipa_v1_2017::___applyCVar(const double *cvar)
   CONSTANTS[GK1_b] *= cvar[5];		// GK1
   CONSTANTS[Gncx_b] *= cvar[6];		// GNaCa
   CONSTANTS[GKb_b] *= cvar[7];		// GKb
-  CONSTANTS[PCa] *= cvar[8];		// PCa
+  CONSTANTS[PCa_b] *= cvar[8];		// PCa
   CONSTANTS[Pnak_b] *= cvar[9];		// INaK
   CONSTANTS[PNab] *= cvar[10];		// PNab
   CONSTANTS[PCab] *= cvar[11];		// PCab
