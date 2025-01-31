@@ -225,6 +225,9 @@ enum E_ALGEBRAIC_T{
   Jleak = 220,
   Jup = 221,
   Jtr = 222,
+  ca_trpn_dt = 223,
+  ca_trpn_dt_mech = 224,
+  Bcai_star = 225,
 };
 
 enum E_CONSTANTS_T{

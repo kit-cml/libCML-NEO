@@ -488,7 +488,7 @@
 
 Tomek_model::Tomek_model()
 {
-  algebraic_size = 223;
+  algebraic_size = 223+3; // Add ca_trpn_dt, ca_trpn_dt_mech, and Bcai_start for electrical-mechanical feedback
   constants_size = 163+2; // Add 2 constant for scaling factor, Jtr and Jleak
   states_size = 43;
   ALGEBRAIC = new double[algebraic_size];
@@ -719,6 +719,8 @@ CONSTANTS[b1] =  CONSTANTS[k1m]*CONSTANTS[MgADP];
 CONSTANTS[a2] = CONSTANTS[k2p];
 CONSTANTS[a4] = (( CONSTANTS[k4p]*CONSTANTS[MgATP])/CONSTANTS[Kmgatp])/(1.00000+CONSTANTS[MgATP]/CONSTANTS[Kmgatp]);
 CONSTANTS[Pnak] = (CONSTANTS[celltype]==1.00000 ?  CONSTANTS[Pnak_b]*0.900000 : CONSTANTS[celltype]==2.00000 ?  CONSTANTS[Pnak_b]*0.700000 : CONSTANTS[Pnak_b]);
+// Just to make sure this variable is initialized.
+ALGEBRAIC[ca_trpn_dt_mech] = 0.;
 }
 
 void Tomek_model::___applyCVar(const double *cvar) {
@@ -1025,8 +1027,10 @@ ALGEBRAIC[fJupp] = 1.00000/(1.00000+CONSTANTS[KmCaMK]/ALGEBRAIC[CaMKa]);
 ALGEBRAIC[Jleak] = CONSTANTS[Jleak_b] * ( 0.00488250*STATES[cansr])/15.0000;
 ALGEBRAIC[Jup] =  CONSTANTS[Jup_b]*(( (1.00000 - ALGEBRAIC[fJupp])*ALGEBRAIC[Jupnp]+ ALGEBRAIC[fJupp]*ALGEBRAIC[Jupp]) - ALGEBRAIC[Jleak]);
 ALGEBRAIC[Bcai] = 1.00000/(1.00000+( CONSTANTS[cmdnmax]*CONSTANTS[kmcmdn])/pow(CONSTANTS[kmcmdn]+STATES[cai], 2.00000)+( CONSTANTS[trpnmax]*CONSTANTS[kmtrpn])/pow(CONSTANTS[kmtrpn]+STATES[cai], 2.00000));
+ALGEBRAIC[Bcai_star] = 1.00000/(1.00000+( CONSTANTS[cmdnmax]*CONSTANTS[kmcmdn])/pow(CONSTANTS[kmcmdn]+STATES[cai], 2.00000));
 ALGEBRAIC[Jtr] = CONSTANTS[Jtr_b]*  (STATES[cansr] - STATES[cajsr])/60.0000;
 ALGEBRAIC[Bcajsr] = 1.00000/(1.00000+( CONSTANTS[csqnmax]*CONSTANTS[kmcsqn])/pow(CONSTANTS[kmcsqn]+STATES[cajsr], 2.00000));
+ALGEBRAIC[ca_trpn_dt] = CONSTANTS[trpnmax]*ALGEBRAIC[ca_trpn_dt_mech];
 
 RATES[hL] = (ALGEBRAIC[hLss] - STATES[hL])/CONSTANTS[thL];
 RATES[hLp] = (ALGEBRAIC[hLssp] - STATES[hLp])/CONSTANTS[thLp];
@@ -1068,7 +1072,9 @@ RATES[nai] = ( - (ALGEBRAIC[INa]+ALGEBRAIC[INaL]+ 3.00000*ALGEBRAIC[INaCa_i]+ALG
 RATES[nass] = ( - (ALGEBRAIC[ICaNa_ss]+ 3.00000*ALGEBRAIC[INaCa_ss])*CONSTANTS[Acap])/( CONSTANTS[F]*CONSTANTS[vss]) - ALGEBRAIC[JdiffNa];
 RATES[cass] =  ALGEBRAIC[Bcass]*((( - (ALGEBRAIC[ICaL_ss] -  2.00000*ALGEBRAIC[INaCa_ss])*CONSTANTS[Acap])/( 2.00000*CONSTANTS[F]*CONSTANTS[vss])+( ALGEBRAIC[Jrel]*CONSTANTS[vjsr])/CONSTANTS[vss]) - ALGEBRAIC[Jdiff]);
 RATES[V] = - (ALGEBRAIC[INa]+ALGEBRAIC[INaL]+ALGEBRAIC[Ito]+ALGEBRAIC[ICaL]+ALGEBRAIC[ICaNa]+ALGEBRAIC[ICaK]+ALGEBRAIC[IKr]+ALGEBRAIC[IKs]+ALGEBRAIC[IK1]+ALGEBRAIC[INaCa_i]+ALGEBRAIC[INaCa_ss]+ALGEBRAIC[INaK]+ALGEBRAIC[INab]+ALGEBRAIC[IKb]+ALGEBRAIC[IpCa]+ALGEBRAIC[ICab]+ALGEBRAIC[IClCa]+ALGEBRAIC[IClb]+ALGEBRAIC[I_katp]+ALGEBRAIC[Istim]);
-RATES[cai] =  ALGEBRAIC[Bcai]*((( - ((ALGEBRAIC[ICaL_i]+ALGEBRAIC[IpCa]+ALGEBRAIC[ICab]) -  2.00000*ALGEBRAIC[INaCa_i])*CONSTANTS[Acap])/( 2.00000*CONSTANTS[F]*CONSTANTS[vmyo]) - ( ALGEBRAIC[Jup]*CONSTANTS[vnsr])/CONSTANTS[vmyo])+( ALGEBRAIC[Jdiff]*CONSTANTS[vss])/CONSTANTS[vmyo]);
+//RATES[cai] =  ALGEBRAIC[Bcai]*((( - ((ALGEBRAIC[ICaL_i]+ALGEBRAIC[IpCa]+ALGEBRAIC[ICab]) -  2.00000*ALGEBRAIC[INaCa_i])*CONSTANTS[Acap])/( 2.00000*CONSTANTS[F]*CONSTANTS[vmyo]) - ( ALGEBRAIC[Jup]*CONSTANTS[vnsr])/CONSTANTS[vmyo])+( ALGEBRAIC[Jdiff]*CONSTANTS[vss])/CONSTANTS[vmyo]);
+// Accomodate for EC-coupling.
+RATES[cai] =  ALGEBRAIC[Bcai_star]*( (( - ((ALGEBRAIC[ICaL_i]+ALGEBRAIC[IpCa]+ALGEBRAIC[ICab]) -  2.00000*ALGEBRAIC[INaCa_i])*CONSTANTS[Acap])/( 2.00000*CONSTANTS[F]*CONSTANTS[vmyo]) - ( ALGEBRAIC[Jup]*CONSTANTS[vnsr])/CONSTANTS[vmyo])+(( ALGEBRAIC[Jdiff]*CONSTANTS[vss])/CONSTANTS[vmyo]) - ALGEBRAIC[ca_trpn_dt] );
 RATES[cansr] = ALGEBRAIC[Jup] - ( ALGEBRAIC[Jtr]*CONSTANTS[vjsr])/CONSTANTS[vnsr];
 RATES[cajsr] =  ALGEBRAIC[Bcajsr]*(ALGEBRAIC[Jtr] - ALGEBRAIC[Jrel]);
 }
