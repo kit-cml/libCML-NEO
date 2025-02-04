@@ -17,6 +17,7 @@ struct Parameter
   double stim_dur;
   double stim_amp_scale;
   bool is_postprocessing;
+  bool is_cvar;
   // begin conductance scaling vars
   double gks_scale;
   double gkr_scale;
@@ -33,11 +34,11 @@ struct Parameter
   char mutation_type[20];
   char hill_file[100];
   char herg_file[100];
+  char cvar_file[100]; // CVAR
   char drug_name[100];
   char concs[50];
   char user_name[20];
   char steady_states_init_vals_file[100];
-  bool is_cvar;
 
 #ifdef TISSUE
   // from this point on,

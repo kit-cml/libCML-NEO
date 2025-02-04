@@ -3,6 +3,7 @@
 
 #include "../types/parameter.hpp"
 #include "../types/drug_block_input.hpp"
+#include "../types/cvar_input.hpp"
 
 #include <cstdio>
 #include <vector>
@@ -33,7 +34,8 @@ int is_file_existed(const char* pathname);
 // parsing drug sample data.
 // using generic function
 // for both IC50-Hill and hERG vectors.
-int get_drug_data_from_file(const char *filename, Drug_Block_Input &vec);
+template <typename RowType, typename InputType>
+int get_data_from_file(const char *filename, InputType &vec);
 int check_drug_data_content(const Drug_Block_Input &vec, const Parameter *p_param);
 
 // parameter assignment

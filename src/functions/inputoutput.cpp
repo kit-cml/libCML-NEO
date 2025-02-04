@@ -82,31 +82,32 @@ int is_file_existed(const char* pathname)
 #endif
 }
 
-int get_drug_data_from_file(const char *file_name, Drug_Block_Input &vec)
+// Templated function implementation
+template <typename RowType, typename InputType>
+int get_data_from_file(const char *file_name, InputType &vec)
 {
   FILE *fp_drugs;
   char *token, buffer[255];
-  Drug_Row temp_array;
+  RowType temp_array;
   short idx;
 
-  if( (fp_drugs = fopen(file_name, "r")) == NULL){
+  if ((fp_drugs = fopen(file_name, "r")) == NULL) {
     printf("Cannot open file %s\n", file_name);
     return 1;
   }
 
   fgets(buffer, sizeof(buffer), fp_drugs); // skip header
-  while( fgets(buffer, sizeof(buffer), fp_drugs) != NULL )
-  { // begin line reading
-    token = strtok( buffer, "," );
+  while (fgets(buffer, sizeof(buffer), fp_drugs) != NULL) { // begin line reading
+    token = strtok(buffer, ",");
     idx = 0;
-    while( token != NULL )
-    { // begin data tokenizing
+    while (token != NULL) { // begin data tokenizing
       temp_array.data[idx++] = strtod(token, NULL);
       token = strtok(NULL, ",");
     } // end data tokenizing
     vec.push_back(temp_array);
   } // end line reading
 
+  fclose(fp_drugs);
   return 0;
 }
 
@@ -240,6 +241,9 @@ int assign_params(int *argc, char *argv[], Parameter *p_param)
     else if (strcasecmp(key, "herg_file") == 0){
       strncpy( p_param->herg_file, value, sizeof(p_param->herg_file));
     }
+    else if (strcasecmp(key, "cvar_file") == 0){
+      strncpy( p_param->cvar_file, value, sizeof(p_param->cvar_file));
+    }
     else if (strcasecmp(key, "mutation_type") == 0){
       strncpy( p_param->mutation_type, value, sizeof(p_param->mutation_type));
     }
@@ -308,18 +312,18 @@ int create_concs_directories( std::vector<double> &concs, const char *drug_name 
   // constants to avoid magic values
   static const char *RESULT_FOLDER_PATH = "result";
   static const double CONTROL_CONC = 0.;
-  char buffer[255];
+  char buffer[900];
   char create_time_str[9];
   int idx;
 
   make_directory(RESULT_FOLDER_PATH);
   snprintf( buffer, sizeof(buffer), "%s/%s", RESULT_FOLDER_PATH, drug_name);
   if(is_file_existed(RESULT_FOLDER_PATH) == 0) make_directory(buffer);
-  snprintf( buffer, sizeof(buffer), "%s/%s/%.0lf", RESULT_FOLDER_PATH, drug_name, CONTROL_CONC);
+  snprintf( buffer, sizeof(buffer), "%s/%s/%.2lf", RESULT_FOLDER_PATH, drug_name, CONTROL_CONC);
   if(is_file_existed(RESULT_FOLDER_PATH) == 0) make_directory(buffer);
   for( idx = 0; idx < concs.size(); idx++ )
   { // begin concentration loop
-    snprintf( buffer, sizeof(buffer), "%s/%s/%.0lf", RESULT_FOLDER_PATH, drug_name, concs[idx] );
+    snprintf( buffer, sizeof(buffer), "%s/%s/%.2lf", RESULT_FOLDER_PATH, drug_name, concs[idx] );
     if(is_file_existed(RESULT_FOLDER_PATH) == 0) make_directory(buffer);
   } // end concentration loop
 

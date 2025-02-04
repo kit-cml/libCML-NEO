@@ -16,6 +16,7 @@ build/./src/functions/helper_cvode.cpp.o: src/functions/helper_cvode.cpp \
  src/functions/../types/cellmodels/cellmodel.hpp \
  src/functions/inputoutput.hpp src/functions/../types/parameter.hpp \
  src/functions/../types/drug_block_input.hpp \
+ src/functions/../types/cvar_input.hpp \
  src/functions/../types/cml_consts.hpp \
  /opt/prog/sundials/sundials-5.7.0/include/cvode/cvode.h \
  /opt/prog/sundials/sundials-5.7.0/include/sundials/sundials_nonlinearsolver.h \
@@ -57,6 +58,8 @@ src/functions/inputoutput.hpp:
 src/functions/../types/parameter.hpp:
 
 src/functions/../types/drug_block_input.hpp:
+
+src/functions/../types/cvar_input.hpp:
 
 src/functions/../types/cml_consts.hpp:
 
