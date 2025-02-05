@@ -111,6 +111,10 @@ int get_data_from_file(const char *file_name, InputType &vec)
   return 0;
 }
 
+// Explicit instantiation for specific types
+template int get_data_from_file<Drug_Row, Drug_Block_Input>(const char *file_name, Drug_Block_Input &vec);
+template int get_data_from_file<Cvar_Row, Cvar_Input>(const char *file_name, Cvar_Input &vec);
+
 int check_drug_data_content(const Drug_Block_Input &vec, const Parameter *p_param)
 {
   if(vec.size() == 0){

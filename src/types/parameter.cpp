@@ -36,8 +36,10 @@ void Parameter::init()
   snprintf(user_name, sizeof(user_name), "%s", "johndoe");
   snprintf(hill_file, sizeof(hill_file), "%s", "./chantest_hill/bepridil/IC50_samples10.csv");
   snprintf(herg_file, sizeof(herg_file), "%s", "./chantest_herg/bepridil/boot_pars10.csv");
+// CVAR
+  snprintf(cvar_file, sizeof(cvar_file), "%s", "./population/control.csv");
   snprintf(drug_name, sizeof(drug_name), "%s", "bepridil");
-  snprintf(steady_states_init_vals_file, sizeof(steady_states_init_vals_file), "%s", "last_states_%hpaces_ord.dat",pace_max);
+  snprintf(steady_states_init_vals_file, sizeof(steady_states_init_vals_file), "last_states_%hd_paces_ord.dat", pace_max);
   snprintf(concs, sizeof(concs), "%s", "99.0");
 
 #ifdef TISSUE
@@ -81,11 +83,12 @@ void Parameter::show_val()
   mpi_printf( 0, "%s -- %s\n", "user_name", user_name);
   mpi_printf( 0, "%s -- %s\n", "hill_file", hill_file );
   mpi_printf( 0, "%s -- %s\n", "herg_file", herg_file );
+  mpi_printf( 0, "%s -- %s\n", "is_cvar", is_cvar ? "true" : "false" );
+  mpi_printf( 0, "%s -- %s\n", "cvar_file", cvar_file );
   mpi_printf( 0, "%s -- %s\n", "steady-state_init_values_file", steady_states_init_vals_file );
   mpi_printf( 0, "%s -- %hd\n", "celltype", celltype);
   mpi_printf( 0, "%s -- %hd\n", "solver_type", solver_type);
   mpi_printf( 0, "%s -- %s\n", "is_postprocessing", is_postprocessing ? "true" : "false" );
-  mpi_printf( 0, "%s -- %s\n", "is_cvar", is_cvar ? "true" : "false" );
   mpi_printf( 0, "%s -- %lf\n", "basic_cycle_length", bcl);
   mpi_printf( 0, "%s -- %hd\n", "number_of_pacing", pace_max);
   mpi_printf( 0, "%s -- %lf\n", "time_step", dt);
