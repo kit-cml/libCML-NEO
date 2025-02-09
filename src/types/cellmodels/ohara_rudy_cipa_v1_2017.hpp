@@ -12,9 +12,9 @@ public:
   ohara_rudy_cipa_v1_2017();
   ~ohara_rudy_cipa_v1_2017();
   void initConsts ();
-  void initConsts(double type);
-  void initConsts(double type, double conc, const double *hill, const double *herg );
-  void initConsts(double type, double conc, const double *hill, const double *herg, const double *cvar );
+  void initConsts(double ctype);
+  void initConsts(double ctype, double conc, const double *hill, const double *herg );
+  void initConsts(double ctype, double conc, const double *hill, const double *herg, const double *cvar );
   void computeRates( double TIME, double *CONSTANTS, double *RATES, double *STATES, double *ALGEBRAIC );
   void solveAnalytical( double dt );
   double set_time_step(double TIME,double time_point, 

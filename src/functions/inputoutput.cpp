@@ -176,6 +176,15 @@ int assign_params(int *argc, char *argv[], Parameter *p_param)
     else if (strcasecmp(key, "basic_cycle_length") == 0) {
       p_param->bcl = strtod( value, NULL );
     }
+    else if (strcasecmp(key, "cl_decrement") == 0) {
+      p_param->cl_decrement = strtod( value, NULL );
+    }
+    else if (strcasecmp(key, "cl_end") == 0) {
+      p_param->cl_end = strtod( value, NULL );
+    }
+    else if (strcasecmp(key, "rest_max_pacing") == 0) {
+      p_param->rest_pace_max = strtod( value, NULL );
+    }
     else if (strcasecmp(key, "number_of_pacing") == 0) {
       p_param->pace_max = strtol( value, NULL, 10 );
     }

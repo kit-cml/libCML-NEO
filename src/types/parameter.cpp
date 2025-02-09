@@ -32,6 +32,10 @@ void Parameter::init()
   tau_h_scale = 1.;
   is_postprocessing = 0;
   is_cvar = 0;
+  // restitution protocol
+  cl_decrement = 10;
+  cl_end = 100;
+  rest_pace_max = 20;
   snprintf(mutation_type, sizeof(mutation_type), "%s", "CTL");
   snprintf(user_name, sizeof(user_name), "%s", "johndoe");
   snprintf(hill_file, sizeof(hill_file), "%s", "./chantest_hill/bepridil/IC50_samples10.csv");
@@ -91,6 +95,11 @@ void Parameter::show_val()
   mpi_printf( 0, "%s -- %s\n", "is_postprocessing", is_postprocessing ? "true" : "false" );
   mpi_printf( 0, "%s -- %lf\n", "basic_cycle_length", bcl);
   mpi_printf( 0, "%s -- %hd\n", "number_of_pacing", pace_max);
+  mpi_printf( 0, "-------- Restitution Protocol (if applied) -------------\n");
+  mpi_printf( 0, "%s -- %hd\n", "cl_decrement", cl_decrement);
+  mpi_printf( 0, "%s -- %hd\n", "cl_end", cl_end);
+  mpi_printf( 0, "%s -- %hd\n", "rest_pace_max", rest_pace_max);
+  mpi_printf( 0, "--------------------------------------------------------\n");
   mpi_printf( 0, "%s -- %lf\n", "time_step", dt);
   mpi_printf( 0, "%s -- %lf\n", "time_step_min", dt_min);
   mpi_printf( 0, "%s -- %lf\n", "time_step_max", dt_max);

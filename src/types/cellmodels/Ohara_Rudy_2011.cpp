@@ -451,9 +451,9 @@ Ohara_Rudy_2011::~Ohara_Rudy_2011()
   delete[] STATES;
 }
 
-void Ohara_Rudy_2011::___initConsts(double type)
+void Ohara_Rudy_2011::___initConsts(double ctype)
 {
-CONSTANTS[celltype] = type;
+CONSTANTS[celltype] = ctype;
 CONSTANTS[nao] = 140;
 CONSTANTS[cao] = 1.8;
 CONSTANTS[ko] = 5.4;
@@ -695,36 +695,45 @@ void Ohara_Rudy_2011::initConsts()
   ___initConsts(0.);
 }
 
-void Ohara_Rudy_2011::initConsts(double type)
+void Ohara_Rudy_2011::initConsts(double ctype)
 {
-  ___initConsts(type);
+  ___initConsts(ctype);
 }
 
-void Ohara_Rudy_2011::initConsts(double type, bool is_dutta)
+void Ohara_Rudy_2011::initConsts(double ctype, bool is_dutta)
 {
-  ___initConsts(type);
+  ___initConsts(ctype);
   if(is_dutta == true)___applyDutta();
 }
 
 
-void Ohara_Rudy_2011::initConsts(double type, double conc, const double *hill, bool is_dutta)
+void Ohara_Rudy_2011::initConsts(double ctype, double conc, const double *hill, bool is_dutta)
 {
-  ___initConsts(type);
+  ___initConsts(ctype);
   mpi_printf(0,"Celltype: %lf\n", CONSTANTS[celltype]);
   mpi_printf(0,"Concentration: %lf\n", conc);
-  mpi_printf(0,"Control: \nPCa:%lf \nGK1:%lf \nGKs:%lf \nGNa:%lf \nGNaL:%lf \nGto:%lf \nGKr:%lf\n",
-      CONSTANTS[PCa_b], CONSTANTS[GK1_b], CONSTANTS[GKs_b], CONSTANTS[GNa], CONSTANTS[GNaL_b], CONSTANTS[Gto_b], CONSTANTS[GKr_b]);
+  mpi_printf(0, 
+    "+------------+------------+------------+------------+------------+------------+------------+------------+\n"
+    "| Parameter  |    PCa     |    GK1     |    GKs     |    GNa     |    GNaL    |    Gto     |    GKr     |\n"
+    "+------------+------------+------------+------------+------------+------------+------------+------------+\n"
+    "| Control    | %10.6lf | %10.6lf | %10.6lf | %10.6lf | %10.6lf | %10.6lf | %10.6lf |\n"
+    "+------------+------------+------------+------------+------------+------------+------------+------------+\n",
+    CONSTANTS[PCa_b], CONSTANTS[GK1_b], CONSTANTS[GKs_b], CONSTANTS[GNa], CONSTANTS[GNaL_b], CONSTANTS[Gto_b], CONSTANTS[GKr_b]);
   if(is_dutta == true)___applyDutta();
-  mpi_printf(0,"After Dutta optimization: \nPCa:%lf \nGK1:%lf \nGKs:%lf \nGNa:%lf \nGNaL:%lf \nGto:%lf \nGKr:%lf\n",
-      CONSTANTS[PCa_b], CONSTANTS[GK1_b], CONSTANTS[GKs_b], CONSTANTS[GNa], CONSTANTS[GNaL_b], CONSTANTS[Gto_b], CONSTANTS[GKr_b]);
+  mpi_printf(0,
+    "| Dutta-opt  | %10.6lf | %10.6lf | %10.6lf | %10.6lf | %10.6lf | %10.6lf | %10.6lf |\n"
+    "+------------+------------+------------+------------+------------+------------+------------+------------+\n",
+    CONSTANTS[PCa_b], CONSTANTS[GK1_b], CONSTANTS[GKs_b], CONSTANTS[GNa], CONSTANTS[GNaL_b], CONSTANTS[Gto_b], CONSTANTS[GKr_b]); 
   ___applyDrugEffect(conc, hill);
-  mpi_printf(0,"After drug: \nPCa:%lf \nGK1:%lf \nGKs:%lf \nGNa:%lf \nGNaL:%lf \nGto:%lf \nGKr:%lf\n",
-      CONSTANTS[PCa_b], CONSTANTS[GK1_b], CONSTANTS[GKs_b], CONSTANTS[GNa], CONSTANTS[GNaL_b], CONSTANTS[Gto_b], CONSTANTS[GKr_b]);
+  mpi_printf(0,
+    "| After-Drug | %10.6lf | %10.6lf | %10.6lf | %10.6lf | %10.6lf | %10.6lf | %10.6lf |\n"
+    "+------------+------------+------------+------------+------------+------------+------------+------------+\n",
+    CONSTANTS[PCa_b], CONSTANTS[GK1_b], CONSTANTS[GKs_b], CONSTANTS[GNa], CONSTANTS[GNaL_b], CONSTANTS[Gto_b], CONSTANTS[GKr_b]); 
 }
 
-void Ohara_Rudy_2011::initConsts(double type, double conc, const double *hill, const double *cvar)
+void Ohara_Rudy_2011::initConsts(double ctype, double conc, const double *hill, bool is_dutta, const double *cvar)
 {
-  initConsts(type, conc, hill, true);
+  initConsts(ctype, conc, hill, is_dutta);
 
   mpi_printf(0,"Implementing Inter-individual Variability\n");
   ___applyCVar(cvar);

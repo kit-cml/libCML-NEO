@@ -18,6 +18,7 @@ struct Parameter
   double stim_amp_scale;
   bool is_postprocessing;
   bool is_cvar;
+
   // begin conductance scaling vars
   double gks_scale;
   double gkr_scale;
@@ -39,7 +40,10 @@ struct Parameter
   char concs[50];
   char user_name[20];
   char steady_states_init_vals_file[100];
-
+  // restitution protocol
+  double cl_decrement;
+  double cl_end;
+  double rest_pace_max;
 #ifdef TISSUE
   // from this point on,
   // these parameters are belonging to

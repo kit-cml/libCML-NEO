@@ -536,9 +536,9 @@ ohara_rudy_cipa_v1_2017::~ohara_rudy_cipa_v1_2017()
   delete[] STATES;
 }
 
-void ohara_rudy_cipa_v1_2017::___initConsts(double type)
+void ohara_rudy_cipa_v1_2017::___initConsts(double ctype)
 {
-CONSTANTS[celltype] = type;
+CONSTANTS[celltype] = ctype;
 CONSTANTS[nao] = 140;
 CONSTANTS[cao] = 1.8;
 CONSTANTS[ko] = 5.4;
@@ -853,14 +853,14 @@ void ohara_rudy_cipa_v1_2017::initConsts()
   ___initConsts(0.);
 }
 
-void ohara_rudy_cipa_v1_2017::initConsts(double type)
+void ohara_rudy_cipa_v1_2017::initConsts(double ctype)
 {
-  ___initConsts(type);
+  ___initConsts(ctype);
 }
 
-void ohara_rudy_cipa_v1_2017::initConsts(double type, double conc, const double *hill, const double *herg)
+void ohara_rudy_cipa_v1_2017::initConsts(double ctype, double conc, const double *hill, const double *herg)
 {
-  ___initConsts(type);
+  ___initConsts(ctype);
   mpi_printf(0,"Celltype: %lf\n", CONSTANTS[celltype]);
   mpi_printf(0,"Concentration: %lf\n", conc);
   mpi_printf(0,"Control: \nPCa:%lf \nGK1:%lf \nGKs:%lf \nGNa:%lf \nGNaL:%lf \nGto:%lf \nGKr:%lf\n",
@@ -888,10 +888,9 @@ void ohara_rudy_cipa_v1_2017::initConsts(double type, double conc, const double 
 void ohara_rudy_cipa_v1_2017::initConsts(double type, double conc, const double *hill, const double *herg, const double *cvar)
 {
   initConsts(type, conc, hill, herg);
-  
-  mpi_printf(0,"Implementing Inter-individual Variability\n");
+  mpi_printf(0,"Using Inter-individual Variability...\n");
+ 
   ___applyCVar(cvar);
-
 }
 
 void ohara_rudy_cipa_v1_2017::computeRates( double TIME, double *CONSTANTS, double *RATES, double *STATES, double *ALGEBRAIC )
